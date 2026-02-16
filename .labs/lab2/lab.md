@@ -1,6 +1,6 @@
-# Power BI and CI/CD
+# Lab - Power BI and CI/CD
 
-Duration: 60 minutes
+⏱️ Duration: 90 minutes
 
 Whilst the previous lab introduced you to Git basics and made you familiar with core Git concepts and activities, this final lab is going to move focus to a remote Git server, introduce collaborative workflows and automated CI/CD pipelines. It builds directly on top of your working files from Lab 3.
 

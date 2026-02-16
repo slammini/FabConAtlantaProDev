@@ -1,4 +1,6 @@
-# Power BI Project (PBIP) fundamentals
+# Lab - Power BI Project (PBIP) fundamentals
+
+⏱️ Duration: 120 minutes
 
 Welcome to this lab where you'll get hands-on experience with the **Power BI Project (PBIP)** format. This workshop is designed to help you understand the PBIP folder structure, set up Git source control, publish to a workspace, and work with **TMDL** and **PBIR** files.
 
@@ -11,13 +13,13 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
     
     ![preview features](resources/img/previewfeatures.png)
 
-* Ensure you have the following software:  
+* Ensure you have the following software:    
   * [Visual Studio Code](https://code.visualstudio.com/download)  
   * [TMDL extension](https://marketplace.visualstudio.com/items?itemName=analysis-services.TMDL)
   * [Microsoft Fabric extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric)
-  * [Git for Windows](https://gitforwindows.org/)
-  * [Microsoft PowerShell](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell)
-
+  * [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+  * [Git for Windows](https://gitforwindows.org/)  
+  * [Python 3.13](https://www.python.org/downloads/release/python-31312/)
 
 ## 1. Save a PBIX to PBIP Format
 
@@ -87,13 +89,7 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 
     ![git version](resources/img/git-version.png)
 
-    If Git is not installed or you want to upgrade, the easiest way is via `winget` (Windows Package Manager):
-
-    ```bash
-    winget install git.git
-    ```    
-
-1. All git commits are tagged with your name and email as an identifier. Check the current settings:
+2. All git commits are tagged with your name and email as an identifier. Check the current settings:
 
     ![git config](resources/img/git-config.png)
 
@@ -442,7 +438,7 @@ This exercise demonstrates how to configure a local Power BI report to connect e
    
     ![microsoftFabric-edit-definition](resources/img/microsoftFabric-edit-definition.png)
 
-    You may require to enable the [**Edit Item Definitions**](vscode://settings/Fabric.EditItemDefinitions) property in the extension.
+    You may need to enable the [**Edit Item Definitions**](vscode://settings/Fabric.EditItemDefinitions) setting in the extension.
 
 1. Make a small edit — for example, create a new measure.
 1. **Save** the file. The **Fabric extension** will push the updated definition directly to the workspace.  
@@ -467,29 +463,29 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 ### Edit Report using PBIR
 
 1. Open `Sales.pbip` with **Power BI Desktop**.
-2. Go to **File > Options and settings > Options > Report settings** and enable **Copy object names when right clicking on report objects**.
+1. Go to **File > Options and settings > Options > Report settings** and enable **Copy object names when right clicking on report objects**.
    
    ![settings - copy report object names](resources/img/settings-copypbirobjectname.png)
 
-3. In the `Sales` page, hide the title from the first bar chart.
+1. In the `Sales` page, hide the title from the first bar chart.
    
    ![pbirdemo-hidetitle](resources/img/pbirdemo-hidetitle.png)
 
-4. Open the **More options** menu in the top-right corner and select **Copy object name**
+1. Open the **More options** menu in the top-right corner and select **Copy object name**
    
    ![pbirdemo-copy object name](resources/img/pbirdemo-copyobjectname.png)
 
-5. Save the PBIP.
-6. Open **Visual Studio Code**
-7. Go to **File > Open Folder...** and open the PBIP folder.
-8. Right-click the `Sales.Report` folder, select **Find in folder** and paste the report object name.
+1. Save the PBIP.
+1. Open **Visual Studio Code**
+1. Go to **File > Open Folder...** and open the PBIP folder.
+1. Right-click the `Sales.Report` folder, select **Find in folder** and paste the report object name.
    
    ![pbir-find report object menu](resources/img/pbirdemo-findobjectmenu.png)
 
    ![pbir-find report object](resources/img/pbirdemo-findobjectname.png)
    
-9.  Open the matched file for edit.
-10. Mouse-hover the `height` property and notice that **Visual Studio Code** shows a tooltip that explains the property.
+1. Open the matched file for edit.
+1. Mouse-hover the `height` property and notice that **Visual Studio Code** shows a tooltip that explains the property.
 
     ![pbir-schematooltip](resources/img/pbirdemo-schematooltip.png)
 
@@ -501,102 +497,124 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 
     Learn more about PBIR schemas in [documentation](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-json-schemas).
 
-11. Navigate to the JSON property `visual.visualContainerObjects.title` and notice that the property `show` is configured as `false`. This is the configuration that determines that the visual title is hidden.
+1. Navigate to the JSON property `visual.visualContainerObjects.title` and notice that the property `show` is configured as `false`. This is the configuration that determines that the visual title is hidden.
 
     ![pbir-title hidden property](resources/img/pbir-titlehiddenproperty.png)
 
 ### Edit with script
 
-12. Close **Power BI Desktop**
-13. Create a new **PowerShell** script file named `HideVisualTitles.ps1` side by side with the `Sales.pbip`.
+Now that you know which property to modify in the PBIR JSON, let’s update it in bulk using a script.
+
+1. Close **Power BI Desktop**
+1. Create a new **PowerShell** script file named `HideVisualTitles.ps1` side by side with the `Sales.pbip`.
 
     ```text
     Lab1/
     ├── Sales.Report/
     ├── Sales.SemanticModel/    
-    ├── HideVisualTitles.ps1
+    ├── HideVisualTitles.py
     └── Sales.pbip
     ```
 
-    Copy and paste the following PowerShell code to `HideVisualTitles.ps1`
+    Copy and paste the following PowerShell code to `HideVisualTitles.py`
     
-    ```powershell
-    $ErrorActionPreference = "Stop"
+    ```python
+    import json
+    import os
+    from pathlib import Path
 
-    $currentPath = (Split-Path $MyInvocation.MyCommand.Definition -Parent)
 
-    $reportPath = "$currentPath\Sales.Report"
+    def main():
+        current_path = Path(os.path.dirname(os.path.abspath(__file__)))
+        report_path = current_path / "Sales.Report"
 
-    $visualFiles = Get-ChildItem -Path $reportPath -Recurse -Include visual.json
+        visual_files = list(report_path.rglob("visual.json"))
 
-    foreach ($file in $visualFiles) {       
+        for file in visual_files:
+            print(f"Processing visual in file: {file}")
 
-        $json = Get-Content $file.FullName | ConvertFrom-Json
+            with open(file, "r", encoding="utf-8") as f:
+                data = json.load(f)
 
-        write-host "Processing visual in file: $($file.FullName)"
+            visual = data.get("visual", {})
 
-        # If title show property exists, set it to 'false' if not create it. But its not guaranteed that the parent objects exist.
+            # Ensure the nested structure exists
+            if "visualContainerObjects" not in visual:
+                visual["visualContainerObjects"] = {}
 
-        $showProperty = $json.visual.visualContainerObjects.title.properties.show
+            container_objects = visual["visualContainerObjects"]
 
-        if ($showProperty)
-        {
-            $showProperty.expr.Literal.Value = "false"
-        }
-        else {        
-            if (!$json.visual.visualContainerObjects)
-            {            
-                $json.visual | Add-Member -NotePropertyName "visualContainerObjects" -NotePropertyValue ([PSCustomObject]@{}) -Force
-            }
+            if "title" not in container_objects:
+                container_objects["title"] = [{"properties": {}}]
 
-            if (!$json.visual.visualContainerObjects.title)
-            {  
-                $json.visual.visualContainerObjects | Add-Member -NotePropertyName "title" -NotePropertyValue (@([PSCustomObject]@{"properties" = [PSCustomObject]@{}})) -Force
-            }
+            title = container_objects["title"]
 
-            if (!$json.visual.visualContainerObjects.title.properties.show)
-            {                 
-                $json.visual.visualContainerObjects.title.properties | Add-Member -NotePropertyName "show" -NotePropertyValue ([PSCustomObject]@{
-                "expr" =  [PSCustomObject]@{
-                    "Literal" = [PSCustomObject]@{
-                    "Value" =  "false"
+            # title can be a list (array) — access the first element
+            if isinstance(title, list):
+                title_obj = title[0]
+            else:
+                title_obj = title
+
+            if "properties" not in title_obj:
+                title_obj["properties"] = {}
+
+            properties = title_obj["properties"]
+
+            if "show" not in properties:
+                properties["show"] = {
+                    "expr": {
+                        "Literal": {
+                            "Value": "false"
+                        }
                     }
                 }
-                }) -Force
-            }
+            else:
+                properties["show"]["expr"]["Literal"]["Value"] = "false"
 
-            $json.visual.visualContainerObjects.title.properties.show.expr.Literal.Value = "false"
-        }
+            with open(file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+                f.write("\n")
 
-        $json | ConvertTo-Json -Depth 100 | Set-Content $file.FullName
-    }
+
+    if __name__ == "__main__":
+        main()
 
     ```
-14. Click **Run** in the top-right to run the **PowerShell** script
+1. Click **Run** in the top-right to run the **Python** script
 
-    ![vscode-powershell-run](resources/img/vscode-powershell-run.png)
+    ![vscode-python-run](resources/img/vscode-python-run.png)
 
     The following output is expected:
 
-    ![vscode-powershell-run-output](resources/img/vscode-powershell-run-output.png)
+    ![vscode-python-script-run-output](resources/img/vscode-python-script-run-output.png)
 
-15. Open the `Sales.pbip` with **Power BI Desktop** and notice that all visuals in all pages got the title hidden.
+1. Open the `Sales.pbip` with **Power BI Desktop** and notice that all visuals in all pages got the title hidden.
 
     ![pbir-notitle-report](resources/img/pbir-notitle-report.png)
 
 > [!IMPORTANT]
-> This example is simple and educational - it would have been more efficient to hide titles using multi-select on each page. However, if you needed to apply the same change across 50 reports with an average of 10 pages each, automating it with a script like the one above and running it against all PBIR report files would be far more efficient.
+> This example is simple and educational - it could have been more efficient to hide titles using multi-select on each page. However, if you needed to apply the same change across 50 reports with an average of 10 pages each, automating it with a script like the one above and running it against all PBIR report files would be far more efficient.
 
 ### Edit PBIR using Fabric Extension
 
-16. Open **Visual Studio Code** and navigate to the **Microsoft Fabric extension**.
-17. In the workspace tree-view, expand the report that was previously published to the workspace.
-18. Navigate to the **definition** node of the report — you should see the PBIR JSON files representing the report's pages and visuals directly from the workspace.
-19. Open a visual JSON file and make a small edit — for example, change a visual's `position` properties (x, y, width, height) or modify a visual title text.
-20. Save the file. The **Fabric extension** will push the updated definition directly to the workspace.
-21. Open the report in the Fabric workspace to confirm the changes are reflected.
+1. Open **Visual Studio Code** and navigate to the **Microsoft Fabric extension**.
+1. In the workspace tree-view, expand the report that was previously published to the workspace.
+1. Navigate to the **definition** node of the report - you should see the PBIR JSON files representing the report's pages and visuals directly from the workspace.
+   
+   ![microsoftFabric-expand-definition-report](resources/img/microsoftFabric-expand-definition-report.png)
 
-> [!IMPORTANT]
+1. Open the visual.json of the report title, it should be `definition\pages\ReportSection89a9619c7025093ade1c\visuals\eb5c360e357e8b54eb88\visual.json`, enable file edit and update the title.
+   
+   ![microsoftFabric-edit-definition-report](resources/img/microsoftFabric-edit-definition-report.png)
+
+    You may need to enable the [**Edit Item Definitions**](vscode://settings/Fabric.EditItemDefinitions) setting in the extension.
+
+1.  Save the file. The **Fabric extension** will push the updated definition directly to the workspace.
+1.  Open the report in the Fabric workspace to confirm the changes are reflected.
+   
+   ![microsoftFabric-report-after-edit](resources/img/microsoftFabric-report-after-edit.png)
+   
+> [!TIP]
 > Editing PBIR through the **Fabric extension** allows you to make quick, targeted changes to a report in a workspace **without needing Power BI Desktop or a local PBIP copy**. Combined with TMDL editing, this means you can make end-to-end changes to both semantic models and reports directly in a workspace from **Visual Studio Code**.
 
 ## ✅ Wrap-up
@@ -608,7 +626,7 @@ You've now:
 * Published from both **Power BI Desktop** and **Fabric VS Code extension**, understanding the key differences.
 * Connected a report to a remote semantic model using multiple `definition.pbir` files.
 * Edited and reused TMDL files for semantic model development.
-* Mapped report objects to PBIR files and batch-changed a report using a script.
+* Edited PBIR files, mapped report objects to PBIR files and batch-changed a report using a script.
 * Edited TMDL and PBIR files directly on a workspace using the **Fabric extension**.
 
 ## Useful links

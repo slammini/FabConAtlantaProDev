@@ -1,4 +1,6 @@
-# Power BI and AI
+# Lab - Power BI Development with AI
+
+⏱️ Duration: 90 minutes
 
 This lab shows how AI can assist in your Power BI development - whether it's using AI chats to modify a TMDL script and apply it back to the semantic model, or leveraging AI agents to understand and update your Power BI Project files.
 

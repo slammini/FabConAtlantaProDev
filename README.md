@@ -18,34 +18,31 @@ By the end of this workshop, you will:
 
 | Topic                                    | Content                                                                                                    | Labs                                                              | Time          |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------- |
-| **Power BI Project (PBIP) fundamentals** | • PBIP fundamentals<br>• Git basics<br>• Semantic Modeling as code with TMDL<br>• Report as code with PBIR | [Lab 1 - Power BI Project (PBIP) fundamentals](.labs/lab1/lab.md) | 9:00 - 10:30  |
-| **Power BI & CI/CD**                     | • GitHub Collaboration Workflows<br>• CI/CD Pipelines                                                      | [Lab 2 - Power BI & CI/CD](.labs/lab2/lab.md)                     | 11:00 - 14:30 |
-| **Power BI & AI**                        | • PBIP & AI <br>• Agentic development                                                                      | [Lab 3 - Power BI & AI](.labs/lab3/lab.md)                        | 14:30 - 17:00 |
+| **Power BI Project (PBIP) fundamentals** | • PBIP fundamentals<br>• Git basics<br>• Semantic Modeling as code with TMDL<br>• Report as code with PBIR | [Lab 1 - Power BI Project (PBIP) fundamentals](.labs/lab1/lab.md) | 9:00 - 11:30  |
+| **Power BI & CI/CD**                     | • GitHub Collaboration Workflows<br>• CI/CD Pipelines                                                      | [Lab 2 - Power BI & CI/CD](.labs/lab2/lab.md)                     | 11:30 - 14:30 |
+| **Power BI Development with AI**         | • Power BI Development with AI <br>• Agentic development                                                   | [Lab 3 - Power BI Development with AI](.labs/lab3/lab.md)         | 14:30 - 17:00 |
 
 ## Requirements
 
-- Licensing
+- Licenses
   - Access to a Fabric / Power BI tenant
     - You can use your existing organizational tenant but you must have admin permissions.
     - Power BI Pro license
     - Access to a Fabric Capacity or [Trial](https://learn.microsoft.com/en-us/fabric/fundamentals/fabric-trial)
-    - We can provide a demo account for you if you dont have access to above.
-  - An existing service principal (with `client_id` and `client_secret`) in your Azure tenant or the [permission to create new Entra Application](https://learn.microsoft.com/entra/identity/role-based-access-control/delegate-app-roles) - to be used for CI/CD setup.
+    - We can provide a demo account for you if you dont have access to above.  
   - [Github account](https://github.com/signup)
   - [Sign-up to GitHub Copilot Trial](https://github.com/github-copilot/pro)
+  - _Optional_ An existing service principal (with `client_id` and `client_secret`) in your Azure tenant or the [permission to create new Entra Application](https://learn.microsoft.com/entra/identity/role-based-access-control/delegate-app-roles) - to be used for CI/CD setup.
 - Software
   - [Power BI Desktop](https://pbi.onl/download)
   - [Visual Studio Code](https://code.visualstudio.com/download)
     - Install the following extensions in Visual Studio Code:
       - [TMDL extension](https://marketplace.visualstudio.com/items?itemName=analysis-services.TMDL)
       - [Microsoft Fabric extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric)      
-      - [GitHub Copilot chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)      
-      - _Optional_ [GitHub Actions](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions)
-      - _Optional_ [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)
-      - _Optional_ [Gitlens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
-   - [Git for Windows](https://gitforwindows.org/)
-   - [Microsoft PowerShell](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell)
-   - [Python 3.13] (https://www.python.org/downloads/release/python-31312/)
+      - [GitHub Copilot chat extension](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)      
+      - [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+   - [Git for Windows](https://gitforwindows.org/)   
+   - [Python 3.13](https://www.python.org/downloads/release/python-31312/)
 
 ## FAQ
 

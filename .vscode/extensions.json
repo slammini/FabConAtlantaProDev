@@ -1,12 +1,11 @@
 {
     "recommendations": [
         "analysis-services.tmdl",
-        "fabric.vscode-fabric",
-        "github.copilot",
-        "github.copilot-chat",
-        "ms-vscode.powershell",
+        "analysis-services.powerbi-modeling-mcp",
+        "fabric.vscode-fabric",        
+        "GitHub.copilot-chat",        
         "github.vscode-github-actions",
-        "github.vscode-pull-request-github",
-        "eamodio.gitlens"
+        "github.vscode-pull-request-github",        
+        "ms-python.python"
     ]
 }

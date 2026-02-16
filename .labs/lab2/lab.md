@@ -1,4 +1,4 @@
-# Lab 4 — CI/CD with GitHub Actions
+# Power BI and CI/CD
 
 Duration: 60 minutes
 

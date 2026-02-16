@@ -1,10 +1,11 @@
 # Power BI for Developers: PBIP and CI/CD Unleashed
 
-Hands-on deep dive into Power BI developer mode and the powerful capabilities unlocked by Power BI Project files (PBIP). In this workshop, you’ll explore TMDL and PBIR file formats, learning how they open the door to structured, source-controlled development workflows.
+Hands-on deep dive into Power BI developer mode and the powerful capabilities unlocked by Power BI Project files (PBIP). In this session, you’ll explore TMDL and PBIR file formats, learning how they open the door to structured, source-controlled development workflows.
 
-We’ll show you how to accelerate your Power BI development using TMDL and PBIR – enhanced with AI-assisted tooling – to boost productivity and consistency.
-
-You’ll also learn how to bring modern DevOps practices into your BI projects, from seamless CI/CD pipelines to automated deployments, using both built-in features and innovative community-driven solutions.
+By the end of this workshop, you will:
+- Gain a solid understanding of Power BI Project file formats (PBIP, TMDL, PBIR) and how they support modern, scalable development workflows.
+- Learn how to effectively leverage AI to accelerate and enhance Power BI development, with hands-on, practical examples.
+- Understand the value of applying DevOps and CI/CD practices to Power BI projects and walk away with actionable solutions—both out-of-the-box and community-driven.
 
 ## Get started
 
@@ -15,10 +16,11 @@ You’ll also learn how to bring modern DevOps practices into your BI projects, 
 
 ## Agenda
 
-| Topic | Content | Labs | Time |
-|-------|---------|------|------|
-| **Advanced Power BI Development** | • PBIP fundamentals<br>• Automation with AI | [Lab 1 - Power BI Project (PBIP) fundamentals](.labs/lab1/lab1.md)<br>[Lab 2 - PBIP & AI](.labs/lab2/lab2.md)  | 9:00 - 11:30 |
-| **Power BI & DevOps** | • Introduction to Git?<br>• Using Git locally with vscode<br>• GitHub Collaboration Workflows<br>• CI/CD Pipelines | [Lab 3 - Introduction to Git with PBIP](.labs/lab3/lab3.md)<br>[Lab 4 - PBIP & CI/CD with GitHub Actions](.labs/lab4/lab4.md) | 13:30 - 17:00 |
+| Topic                                    | Content                                                                                                    | Labs                                                              | Time          |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------- |
+| **Power BI Project (PBIP) fundamentals** | • PBIP fundamentals<br>• Git basics<br>• Semantic Modeling as code with TMDL<br>• Report as code with PBIR | [Lab 1 - Power BI Project (PBIP) fundamentals](.labs/lab1/lab.md) | 9:00 - 10:30  |
+| **Power BI & CI/CD**                     | • GitHub Collaboration Workflows<br>• CI/CD Pipelines                                                      | [Lab 2 - Power BI & CI/CD](.labs/lab2/lab.md)                     | 11:00 - 14:30 |
+| **Power BI & AI**                        | • PBIP & AI <br>• Agentic development                                                                      | [Lab 3 - Power BI & AI](.labs/lab3/lab.md)                        | 14:30 - 17:00 |
 
 ## Requirements
 
@@ -36,14 +38,14 @@ You’ll also learn how to bring modern DevOps practices into your BI projects, 
   - [Visual Studio Code](https://code.visualstudio.com/download)
     - Install the following extensions in Visual Studio Code:
       - [TMDL extension](https://marketplace.visualstudio.com/items?itemName=analysis-services.TMDL)
-      - [Microsoft Fabric extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric)
-      - [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
-      - [GitHub Copilot chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)
-      - [Microsoft PowerShell](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell)
+      - [Microsoft Fabric extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric)      
+      - [GitHub Copilot chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)      
       - _Optional_ [GitHub Actions](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions)
       - _Optional_ [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)
       - _Optional_ [Gitlens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
    - [Git for Windows](https://gitforwindows.org/)
+   - [Microsoft PowerShell](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell)
+   - [Python 3.13] (https://www.python.org/downloads/release/python-31312/)
 
 ## FAQ
 

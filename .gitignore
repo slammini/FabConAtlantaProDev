@@ -1,4 +1,5 @@
 *.log
 _tools/
 
-*.pbix
+
+**/lab3/**/*.pbix

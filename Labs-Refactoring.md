@@ -21,6 +21,7 @@
 ## Lab 2 - Power BI and CI/CD
 
 - ~Adapt the [projects-deploy-fabric-cicd](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-deploy-fabric-cicd) to a lab
+  - Specific repo for the E2E demo: https://github.com/RuiRomano/workshops-cicd-demo
 - Exercises:
   - Setup fabric-cicd locally 
     - Install python package (Lab 1 already ensures python installation)

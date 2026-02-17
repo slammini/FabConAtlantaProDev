@@ -20,27 +20,22 @@
 
 ## Lab 2 - Power BI and CI/CD
 
-- ~Adapt the [projects-deploy-fabric-cicd](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-deploy-fabric-cicd) to a lab
-  - Specific repo for the E2E demo: https://github.com/RuiRomano/workshops-cicd-demo
+- ~Adapt the [projects-deploy-fabric-cicd](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-deploy-fabric-cicd) to a lab    
+  - Is it still worth it to show BPA? Too much complexity?
 - Exercises:
   - Setup fabric-cicd locally 
-    - Install python package (Lab 1 already ensures python installation)
-  - Prepare repo for CICD from Github
-    - Create a new repo in GitHub
-    - Clone
-  - Save the PBIX as PBIP into the src/ folder of the cloned repo    
-  - Create the `/scripts/deploy.py` targeting the src/ folder
-  - Run fabric-cicd locally - Goal is to show deployment using code
-    - Show some configurations such as deploy only reports or semantic models
+    - New repo from template: https://github.com/RuiRomano/workshops-cicd-demo
+      - Keep the idea of a ready to run repo. But separate from the labs to avoid repo confusion
+    - Clone repo locally    
+  - Run Fabric_CICD locally - Goal is to show deployment using code
+    - Ensure fabric_cicd runs - check python runtime (Lab 1 already ensures python installation)    
+    - Make changes to report and deploy
     - Call out parametrization
-    - Deploy to a different workspace
+      - Show how to parameterize fabric_cicd for simple stuff like deploy only semantic model?  
+      - Deploy to a different workspace  
   - Deploy from GitHub
-    - Prep metadata files and scripts
-      - Configure `.github/workflows`; 
-      - Configure `scripts/.bpa/`
-    - Commit and sync
-    - Configure SPN in GitHub: Use approach from docs with Azure Identity env variables
-      - Prepare list for users
+    - Configure SPN    
+      - Use approach from docs with Azure Identity env variables          
     - Simulate development flow: New BRanch; Change some TMDL / Report > PR > Validate > Deployment to workspace      
       
 ## Lab 3 - Power BI Development with AI

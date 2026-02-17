@@ -19,7 +19,7 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
   * [Microsoft Fabric extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric)
   * [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
   * [Git for Windows](https://gitforwindows.org/)  
-  * [Python 3.13](https://www.python.org/downloads/release/python-31312/)
+  * [Python 3.12](https://www.python.org/downloads/release/python-3120/)
 
 ## 1. Save a PBIX to PBIP Format
 

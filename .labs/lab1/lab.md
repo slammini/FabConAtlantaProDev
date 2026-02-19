@@ -506,7 +506,7 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 Now that you know which property to modify in the PBIR JSON, let’s update it in bulk using a script.
 
 1. Close **Power BI Desktop**
-1. Create a new **PowerShell** script file named `HideVisualTitles.ps1` side by side with the `Sales.pbip`.
+1. Create a new **PowerShell** script file named `HideVisualTitles.py` side by side with the `Sales.pbip`.
 
     ```text
     Lab1/

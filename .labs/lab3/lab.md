@@ -241,16 +241,25 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
 
 ## 4. Enforce Team Best Practices Using the Power BI Modeling MCP Server
 
-**WORK IN PROGRESS**
+✅ **Goal**: Connect **GitHub Copilot** directly to a running Power BI semantic model using the **Power BI Modeling MCP**, review a semantic model against team guidelines, and apply changes through the MCP.
 
-✅ **Goal**: Use the **Power BI Modeling MCP** to connect GitHub Copilot directly to a running Power BI Desktop instance, review a semantic model against team guidelines, and apply changes through the MCP.
-
-### Verify extensions
+### Verify Power BI Modeling MCP in VS Code
  
-1. Make sure the **Power BI Modeling MCP** extension is installed. Search for `Power BI Modeling MCP` in the Extensions panel and install it if needed.
-2. Verify the MCP Server is running - you should see a status indicator in VS Code confirming the MCP server connection is active.
-4. Verify the MCP Server is running - you should see a status indicator in VS Code confirming the MCP server connection is active.
+1. Open **Visual Studio Code**
+2. Make sure the [**Power BI Modeling MCP**](https://marketplace.visualstudio.com/items?itemName=analysis-services.powerbi-modeling-mcp) extension is installed. Search for `Power BI Modeling MCP` in the Extensions panel and install it if needed.
+3. Open the **Command Pallete** (`F1`) > **MCP: List Servers**, click on `powerbi-modeling-mcp` and select **Start Server** or **Restart Server**
+   
+    ![copilot-list-servers](resources/img/copilot-list-servers.png)
 
+    ![copilot-mcp-server](resources/img/copilot-mcp-server.png) 
+
+    ![copilot-mcp-server-start](resources/img/copilot-mcp-server-start.png)    
+
+4. Go to **GitHub Copilot Chat** and start a **new Copilot chat session**
+5. Click **Configure Tools** at the bottom and verify that `powerbi-modeling-mcp` appears along with its tools.
+   
+    ![copilot-mcp-server-tools](resources/img/copilot-mcp-server-tools.png) 
+    
 ### Connect to Power BI Desktop
 
 1. Open [.labs/lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.

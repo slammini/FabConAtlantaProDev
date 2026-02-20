@@ -241,6 +241,8 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
 
 ## 4. Enforce Team Best Practices Using the Power BI Modeling MCP Server
 
+**WORK IN PROGRESS**
+
 ✅ **Goal**: Use the **Power BI Modeling MCP** to connect GitHub Copilot directly to a running Power BI Desktop instance, review a semantic model against team guidelines, and apply changes through the MCP.
 
 ### Verify extensions

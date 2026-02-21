@@ -438,7 +438,7 @@ This exercise demonstrates how to configure a local Power BI report to connect e
    
     ![microsoftFabric-edit-definition](resources/img/microsoftFabric-edit-definition.png)
 
-    You may need to enable the [**Edit Item Definitions**](vscode://settings/Fabric.EditItemDefinitions) setting in the extension.
+    You may need to enable the [**Edit Item Definitions**](vscode://settings/Fabric.EditItemDefinitions) setting in the extension: Open Settings (Ctrl+,) and search: item definitions. Select **allow editing of item definition files in Fabric Workspaces views**
 
 1. Make a small edit — for example, create a new measure.
 1. **Save** the file. The **Fabric extension** will push the updated definition directly to the workspace.  

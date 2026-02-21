@@ -5,6 +5,8 @@
 - All measures, tables and columns must have a business-friendly description. Incorporate business verbiage of the COMPANY in the descriptions. (See [COMPANY verbiage](#company-verbiage))
 - Data Source location (e.g. folder) should be configured as a semantic model parameter
 - Make sure model includes an `About` table that describes the Author and version of the model. See [About](#about-table) for details of how to create the table if not exists.
+- All Measures must be UPPERCASE
+- All Measures must have a format string
 
 ## Naming Conventions
 

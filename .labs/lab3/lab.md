@@ -69,9 +69,11 @@ This lab shows how AI can supercharge your Power BI development — from batch-e
 
     ![vscode-copilot-skill-list](resources/img/vscode-copilot-skill-list.png)
 
-4. _Optional_ Select a reasoning model such as `Claude Sonnet 4.5` or `GPT-5.1`. If its first time using GitHub Copilot, you can sign-up to a [**GitHub Copilot Pro trial**](https://github.com/github-copilot/pro)
+4. Select a reasoning model such as `Claude Sonnet 4.5` or `GPT-5.1`. If its first time using GitHub Copilot, you can sign-up to a [**GitHub Copilot Pro trial**](https://github.com/github-copilot/pro). 
 
     ![vscode-copilot-pick-model](resources/img/vscode-copilot-pick-model.png)
+    
+    In case of premium models not being available select `GPT-5 mini` model.
 
 > [!TIP]
 > - It is recommended to start a [GitHub Copilot Pro trial](https://github.com/github-copilot/pro) subscription to get to premium reasoning models such as `Claude Sonnet 4.5`, which produce significantly better results for Agentic Power BI development tasks. See [model-comparison](https://docs.github.com/en/copilot/reference/ai-models/model-comparison) for more information.
@@ -130,6 +132,7 @@ This lab shows how AI can supercharge your Power BI development — from batch-e
     Load powerbi-tmdl skill
     Apply descriptions to all measures in the selected TMDL file
     ```
+
 3. Accept agent changes to `script.tmdl` by clicking **Keep** and copy the entire script text (`CTRL + A`) to a new **TMDL view** tab in **Power BI Desktop**
    
     ![copilot-accept-changes](resources/img/copilot-accept-changes.png)
@@ -180,7 +183,7 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
 1. Open [.labs/lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.
 1. Go to **File > Save As**, choose the lab3 folder (e.g. `c:\temp\lab3\`) and select **Save as type**: `Power BI Project Files (*.pbip)`. Name it `Sales_Lab3_PBIR.pbip`.
    
-    Your Lab3 folder should look like this:
+    Your `Lab3/` folder should look like this:
 
     ```text
     Lab3/
@@ -239,9 +242,9 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
 > [!TIP]
 > This approach scales remarkably well. Imagine a report with dozens of pages where visuals have drifted out of alignment over time - rather than manually repositioning each one, you can describe the desired layout to the AI agent and let it handle the tedious work across all pages and visuals.
 
-## 4. Enforce Team Best Practices Using the Power BI Modeling MCP Server
+## 4. Agentic modeling using the Power BI Modeling MCP Server
 
-✅ **Goal**: Connect **GitHub Copilot** directly to a running Power BI semantic model using the **Power BI Modeling MCP**, review a semantic model against team guidelines, and apply changes through the MCP.
+✅ **Goal**: Connect **GitHub Copilot** directly to a running Power BI semantic model using the **Power BI Modeling MCP** and apply modeling changes.
 
 ### Verify Power BI Modeling MCP in VS Code
  
@@ -268,46 +271,115 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
 4. Type the following prompt and execute:
 
     ```
-    Connect to Power BI Desktop 'Sales'
+    Connect to 'Sales' Power BI Desktop local instance.
+    Do not use any TMDL or TMSL code. Use only MCP tools.
+    ```
+    Note: 'Sales' is the Power BI Desktop file name. The explicit callout to not use TMDL should only be required when using non-premium models. 
+
+    The MCP server will find **Power BI Desktop** local Analysis Services instances that match the name and establish a connection. You should see confirmation in the chat that the connection was successful.
+
+    ![copilot-mcp-server-connect](resources/img/copilot-mcp-server-connect.png)
+
+    Warning: If you still have the PBIP folder in `Lab3/` the Agent might get confused and connect to the TMDL files in the `.SemanticModel/` folder. In that case you may need to be more explicit and say in the prompt that you don't want to connect to PBIP folder.
+
+5. Type the following prompt to test the connection:
+   
+    ```
+    What are the largest tables in my semantic model?
     ```
 
-5. The MCP server will establish a connection to the running Power BI Desktop instance. You should see confirmation in the chat that the connection was successful.
+    ![copilot-mcp-server-largest-tables](resources/img/copilot-mcp-server-largest-tables.png)
 
-### Review the model against team guidelines
-
-6. Copy the file [`resources/modeling-best-practices.md`](resources/modeling-best-practices.md) into your VS Code workspace folder.
-7. In the Copilot chat, type the following prompt:
+6. Type the following prompt to set descriptions using a company verbiage in all columns and measures
 
     ```
-    Load my team modeling guidelines in modeling-best-practices.md, review my model and tell me what should I change
+    Set descriptions in all measures of my model. Incorporate business verbiage in the descriptions.    
+
+    ## Business verbiage
+
+    - sells products from a series of brands across multiple countries.
+    - operates physical retail stores and an online platform to reach global customers.
+    - offers a wide range of products including clothing, home goods, and electronics.
+    - serves millions of customers annually through both digital and in-store experiences.
+    - uses data and technology to personalize the shopping experience.
+    - partners with manufacturers and suppliers to ensure product quality and availability.
+    - invests in sustainable practices across its supply chain and packaging.
+    - has a global workforce and local teams to support regional markets.
     ```
 
-8. Observe how the agent uses the **MCP** to analyze the semantic model:
-   * It reads the modeling guidelines from the markdown file.
-   * It queries the semantic model through the MCP to inspect tables, columns, measures, and their properties.
-   * It produces a summary of what needs to change — such as missing descriptions, naming convention violations, missing tables (e.g. the About table), or other guideline deviations.
+7. Observe how the agent uses the available MCP tools to analyze the tables and set the descriptions
+   
+   ![copilot-mcp-server-apply-descriptions](resources/img/copilot-mcp-server-apply-descriptions.png)
+
+8. Go back to **Power BI Desktop** and verify that the descriptions were applied to the measures using the business verbiage
+
+    ![copilot-mcp-server-measure-descriptions](resources/img/copilot-mcp-server-measure-descriptions.png)
+
+9. _Optional_ Try other modeling changes such as:
+    
+    - `Generate a French translation culture for my model including tables, columns and measures.`      
+    - `Move all my measures into a '_MEASURES_' table`
+    - `Optimize the DAX of measure Sales Amount (12M average). But run a trace to ensure the new version is better and returns the same data.`    
 
 > [!TIP]
-> This is a powerful pattern for team governance. By maintaining a `modeling-best-practices.md` file in your repository, any team member can ask the AI to audit a semantic model against the team's standards at any time.
+> - Each time the agent executes an MCP server tool, it asks for user approval. To avoid being prompted on every execution, select **Allow tools from powerbi-modeling-mcp in this session**. GitHub Copilot will then stop prompting you for this MCP server.
+>   ![copilot-mcp-server-approval](resources/img/copilot-mcp-server-approval.png)
+> - The MCP server can connect to semantic models in Power BI Desktop, Fabric Workspace or PBIP folders. Learn more in [powerbi-modeling-mcp](https://github.com/microsoft/powerbi-modeling-mcp?tab=readme-ov-file#-get-started)
 
-### Apply the changes
+## 5. _Optional_ Enforce Team Best Practices Using the Power BI Modeling MCP Server
 
-9. Now prompt the agent to apply the recommended changes:
+✅ **Goal**: Connect **GitHub Copilot** directly to a running Power BI semantic model using the **Power BI Modeling MCP**, review a semantic model against team guidelines, and apply changes through the MCP.
 
+⚠️ **Warning**: It is recommended to complete this exercise using a premium model such as `Claude Sonnet 4.5`. When using non-premium models, such as `GPT-5 mini`, there is a high likelihood of hallucinations.
+
+# Review the model against team guidelines
+
+1. Open [.labs/lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.
+1. Copy the file [`resources/modeling-best-practices.md`](resources/modeling-best-practices.md) into your lab folder.
+   
+    Your `Lab3/` folder should look like this:
+
+    ```text
+    Lab3/
+    ├── .github/
+    │   └── skills/
+    │       ├── powerbi-semantic-model/
+    │       │   └── SKILL.md
+    │       ...    
+    ├── ...    
+    ├── modeling-best-practices.md
     ```
+
+3. In the Copilot chat, type the following prompt:
+
+    ```    
+    Load my team modeling guidelines in `modeling-best-practices.md`, review my semantic model and tell me what should I change
+    ```    
+
+   Observe how the agent uses the **MCP** to analyze the semantic model:
+   
+   * It reads the modeling guidelines from the markdown file.
+   * It queries the semantic model through the MCP to inspect tables, columns, measures,... and their properties.
+   * It produces a summary of what needs to change 
+  
+    ![copilot-mcp-server-guidelines-review](resources/img/copilot-mcp-server-guidelines-review.png)
+
+4. Now prompt the agent to apply the recommended changes:
+
+    ```    
     Apply the changes
     ```
 
-10. Watch the MCP in action — the agent will make changes to the semantic model just as if you were editing it through an external tool:
-    * Adding descriptions to tables, columns, and measures.
-    * Renaming objects to follow naming conventions.
-    * Creating the About table if it doesn't exist.
-    * Any other changes identified during the review.
+    Watch the MCP in action - the agent will make changes to the semantic model just as if you were editing it through an external tool. You can watch the changes being applied in real-time in **Power BI Desktop**
 
-11. Go back to **Power BI Desktop** and verify that the changes have been applied to the semantic model. You should see updated descriptions, renamed objects, and any new tables the agent created.
+    ![copilot-mcp-server-guidelines-applied](resources/img/copilot-mcp-server-guidelines-applied.png)
+      
+5. Go back to **Power BI Desktop** and verify that the changes have been applied to the semantic model. 
 
-> [!IMPORTANT]
-> The MCP server acts as a bridge between the AI and Power BI Desktop, allowing the agent to read and write to the semantic model programmatically. This means you can automate complex model governance tasks that would otherwise require manual work across dozens of objects.
+6. _Optional_ Change the `modeling-best-practices.md` with new rules, prompt the agent to review the model again and check if the new rules are applied.
+
+> [!TIP]
+> - This is a powerful pattern for team governance. By maintaining a `modeling-best-practices.md` file in your repository, any team member can ask the AI to audit a semantic model against the team's standards at any time.
 
 ## ✅ Wrap-up
 
@@ -316,7 +388,7 @@ You've now:
 * Set up your VS Code environment with AI skills, GitHub Copilot, and the Power BI Modeling MCP extension.
 * Used **TMDL view** + **GitHub Copilot** with the `powerbi-tmdl` skill to batch-edit measure descriptions with correct TMDL syntax.
 * Used **GitHub Copilot** with the `powerbi-pbir` skill to analyze and fix report visual alignment by reading and updating PBIR JSON files.
-* Connected to Power BI Desktop through the **MCP server**, reviewed a semantic model against team best practices, and applied changes programmatically.
+* Connected to Power BI Desktop through the **MCP server**, applied changes and reviewed a semantic model against team best practices.
 
 ## Useful links
 

@@ -50,4 +50,6 @@ By the end of this workshop, you will:
 
 **A:** Ask the workshop instructors for a demo account.
 
+**Q: I need a Credit Card for GitHub Copilot Pro Trial**
 
+**A:** Yes. Is mainly to prevent abuse. You can sign-up and cancel after the workshop to avoid any charges.

@@ -23,7 +23,20 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 
 ## 1. Save a PBIX to PBIP Format
 
-✅ **Goal**: Save your report as a PBIP project.
+✅ **Goal**: Save your pbix as a PBIP project.
+
+When you save your work as a Power BI Project (PBIP), report and semantic model item definitions are saved as individual plain text files in a simple, intuitive folder structure.
+
+Saving your work as a project has the following benefits:
+    - Text editor support
+    - Folder structure transparency 
+    - Source control ready 
+    - CI/CD support 
+    - Programmatic generation and editing item definitions
+
+To learn more about about PBIP: https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview
+
+In this section, we'll see how to save a .pbix file as a PBIP. Let's get started!
 
 1. Open [resources/Sales.pbix](resources/Sales.pbix) in **Power BI Desktop**.
    
@@ -47,9 +60,20 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
     └── Sales.pbip
     ```
 
+
+<project name>.Semantic model contains a collection of files and folders that represent a Power BI semantic model. To learn more about the files and subfolders and files in here, see [Project Semantic Model folder](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-dataset).
+
+<project name>.Report contains a collection of files and folders that represent a Power BI report. To learn more about the files and subfolders and files in here, see [Project report folder](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report).
+
+.gitIgnore specifies intentionally untracked files Git should ignore for Power BI Project files.
+
+<project name>.pbip contains a pointer to a report folder. Opening a PBIP opens th e targeted report and model for authoring. 
+
 ## 2. Explore PBIP files and folders
 
 ✅ **Goal**: Understand how Power BI Project is organized and its key files and folders.
+
+Now that our PBIP is ready, let's take a closer look at the folders and files in the project's root folder to understand how it's organized.
 
 1. Open **Visual Studio Code**
 1. Go to **File > Open Folder...** and open the saved PBIP folder.
@@ -78,6 +102,10 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 ## 3. Version Control your PBIP
 
 ✅ **Goal**: Set up Git, initialize a repository for your PBIP project, track changes, commit, view history, and restore to a previous version.
+
+One of the biggest advantages of PBIP is that its plain text files integrate seamlessly with Git — giving you full version history, team collaboration, and CI/CD support with quality gates and automated deployments. 
+
+In this section, we'll set up source control to track and understand the impact of every change throughout the workshop, across both the semantic model and the report. Let's go!
 
 ### First time using Git in machine? (skip if you already use Git)
 
@@ -460,7 +488,51 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 
 ✅ **Goal**: Map a report object to a PBIR file, identify changes, batch apply changes using a script, and edit PBIR directly on a workspace using the Fabric extension.
 
+In this section, we'll focus on report as code with PBIR. We'll do a deep dive into the folders and subfolders that represent the Power BI report — specifically, the <project name>.Report folder within our PBIP project.
+
+To learn more: [Power BI Desktop project report folder](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop)
+
+### Understand PBIR
+1. Open `Sales.pbip` with **Vs Code** and look at the files and subfolders inside <project name>.Report:
+
+![alt text](image.png)
+
+2. Open and inspect the definition folder. Inside, you'll find:
+
+    2.1. A pages folder containing one subfolder for each page in your report. Each page folder includes a visuals folder, which in turn contains a subfolder for every visual on that page. Inside each visual's subfolder, you'll find a visual.json file with the full definition of that visual.
+
+
+3. Open and inspect the pages.json file. This file contains all the pages in your report
+
+4. Open and inspect report.json. This file contains the report definition in the Power BI Report Legacy format (PBIR-Legacy) and doesn't support external editing.
+
+5. .platfrom. Fabric platform file that holds properties vital for establishing and maintaining the connection between Fabric items and Git.
+  
+6. Open and inspect definition.pbir. This file contains the overall definition of a report and core settings. This file also hold the reference to the semantic model used by the report. Power BI Desktop can open a PBIR file directly, just the same as if the report were opened from a PBIP file. Opening a PBIR file also opens the semantic model alongside if there's a relative reference using byPath.
+
+To put this into practice, let's go to Power BI Desktop and make some changes to see how PBIR works:
+
+1. Go to Power BI Desktop and make any change to any visual. For example, resize and reposition the KPI table on the KPI page. Save your changes in Power BI Desktop.
+
+![alt text](image-1.png)
+
+2. Go to Vs Code and look at the changes. You can see the changes in the visual.json for the modified visual. Commit the changes: 
+
+![alt text](image-2.png)
+
+3. Let's now go back to Power BI Desktop and create a new page with a new visual:
+
+![alt text](image-4.png)
+
+4. Once you are ready, save your changes and go back to VS Code to explore the modified files. Inspect the added and modified files
+
+![alt text](image-5.png)
+
+
+
 ### Edit Report using PBIR
+
+Now that we understand the PBIR structure and have seen how changes made in Power BI Desktop are reflected in the PBIR files, it's time to learn how to edit our reports directly using PBIR.
 
 1. Open `Sales.pbip` with **Power BI Desktop**.
 1. Go to **File > Options and settings > Options > Report settings** and enable **Copy object names when right clicking on report objects**.
@@ -500,6 +572,12 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 1. Navigate to the JSON property `visual.visualContainerObjects.title` and notice that the property `show` is configured as `false`. This is the configuration that determines that the visual title is hidden.
 
     ![pbir-title hidden property](resources/img/pbir-titlehiddenproperty.png)
+
+
+### Edit with AI 
+In this exercise, we'll see how AI combined with PBIR can help us edit reports much more effectively.
+
+
 
 ### Edit with script
 

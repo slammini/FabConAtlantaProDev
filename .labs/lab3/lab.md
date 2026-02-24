@@ -56,7 +56,7 @@ This lab shows how AI can supercharge your Power BI development — from batch-e
    
     ![copilot-agent-mode](resources/img/copilot-agent-mode.png)
 
-1. Enable [Agent Skills](vscode://settings/chat.useAgentSkills) in user settings.
+1. Enable [Agent Skills](vscode://settings/chat.useAgentSkills) in user settings (Ctrl+,).
    
     ![copilot-agent-skills-enable](resources/img/copilot-agent-skills-enable.png)
 

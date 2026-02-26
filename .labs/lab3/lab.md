@@ -249,7 +249,7 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
 ### Verify Power BI Modeling MCP in VS Code
  
 1. Open **Visual Studio Code**
-2. Make sure the [**Power BI Modeling MCP**](https://marketplace.visualstudio.com/items?itemName=analysis-services.powerbi-modeling-mcp) extension is installed. Search for `Power BI Modeling MCP` in the Extensions panel and install it if needed.
+2. Make sure the [**Power BI Modeling MCP**](https://marketplace.visualstudio.com/items?itemName=analysis-services.powerbi-modeling-mcp) extension is installed with latest version. Search for `Power BI Modeling MCP` in the Extensions panel and install it if needed.
 3. Open the **Command Pallete** (`F1`) > **MCP: List Servers**, click on `powerbi-modeling-mcp` and select **Start Server** or **Restart Server**
    
     ![copilot-list-servers](resources/img/copilot-list-servers.png)
@@ -327,7 +327,7 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
 > - The MCP server can connect to semantic models in Power BI Desktop, Fabric Workspace or PBIP folders. Learn more in [powerbi-modeling-mcp](https://github.com/microsoft/powerbi-modeling-mcp?tab=readme-ov-file#-get-started)
 > - The Power BI Modeling MCP server can only execute modeling operations. It cannot modify other types of Power BI metadata, such as report pages or semantic model elements like diagram layouts.
 
-## 5. _Optional_ Enforce Team Best Practices Using the Power BI Modeling MCP Server
+## 5. Enforce Team Best Practices Using the Power BI Modeling MCP Server [_Optional_]
 
 ✅ **Goal**: Connect **GitHub Copilot** directly to a running Power BI semantic model using the **Power BI Modeling MCP**, review a semantic model against team guidelines, and apply changes through the MCP.
 

@@ -31,18 +31,13 @@ By the end of this workshop, you will:
     - Access to a Fabric Capacity or [Trial](https://learn.microsoft.com/en-us/fabric/fundamentals/fabric-trial)
     - An existing service principal (with `client_id` and `client_secret`) in your Azure tenant or the [permission to create new Entra Application](https://learn.microsoft.com/entra/identity/role-based-access-control/delegate-app-roles) - to be used for CI/CD setup.
     - We can provide a demo account for you if you dont have access to above.  
-  - [Github account](https://github.com/signup)
-  - [Sign-up to GitHub Copilot Trial](https://github.com/github-copilot/pro)
+  - [GitHub account](https://github.com/signup)
+  - [GitHub Copilot Pro](https://github.com/github-copilot/pro) [_Optional_]
 - Software
   - [Power BI Desktop](https://pbi.onl/download)
   - [Visual Studio Code](https://code.visualstudio.com/download)
-    - Install the following extensions in Visual Studio Code:
-      - [TMDL extension](https://marketplace.visualstudio.com/items?itemName=analysis-services.TMDL)
-      - [Microsoft Fabric extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric)      
-      - [GitHub Copilot chat extension](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)      
-      - [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-   - [Git for Windows](https://gitforwindows.org/)   
-   - [Python 3.12](https://www.python.org/downloads/release/python-3120/)
+  - [Git for Windows](https://gitforwindows.org/)   
+  - [Python 3.12](https://www.python.org/downloads/release/python-3120/)
 
 ## FAQ
 

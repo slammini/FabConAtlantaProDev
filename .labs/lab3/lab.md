@@ -290,7 +290,9 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
 
     ![copilot-mcp-server-largest-tables](resources/img/copilot-mcp-server-largest-tables.png)
 
-6. Type the following prompt to set descriptions using a company verbiage in all columns and measures
+### Set Descriptions with MCP
+
+1. Type the following prompt to set descriptions using a company verbiage in all columns and measures
 
     ```
     Set descriptions in all measures of my model. Incorporate business verbiage in the descriptions.    
@@ -307,15 +309,15 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
     - has a global workforce and local teams to support regional markets.
     ```
 
-7. Observe how the agent uses the available MCP tools to analyze the tables and set the descriptions
+1. Observe how the agent uses the available MCP tools to analyze the tables and set the descriptions
    
    ![copilot-mcp-server-apply-descriptions](resources/img/copilot-mcp-server-apply-descriptions.png)
 
-8. Go back to **Power BI Desktop** and verify that the descriptions were applied to the measures using the business verbiage
+1. Go back to **Power BI Desktop** and verify that the descriptions were applied to the measures using the business verbiage
 
     ![copilot-mcp-server-measure-descriptions](resources/img/copilot-mcp-server-measure-descriptions.png)
 
-9. _Optional_ Try other modeling changes such as:
+1. _Optional_ Try other modeling changes such as:
     
     - `Generate a French translation culture for my model including tables, columns and measures.`      
     - `Move all my measures into a '_MEASURES_' table`

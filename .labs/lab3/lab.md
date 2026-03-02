@@ -154,6 +154,7 @@ This lab shows how AI can supercharge your Power BI development — from batch-e
 > [!TIP]
 > - The AI model you select directly influences the quality and relevance of the responses you receive. For the best results, choose a deep-reasoning model such as `GPT-5.1` or `Claude Sonnet 4.5`. You can find more details about available models in the [model-comparison](https://docs.github.com/en/copilot/reference/ai-models/model-comparison).
 > - Creating a [new chat session](https://code.visualstudio.com/docs/copilot/chat/chat-sessions#_start-a-new-chat-session) clears the history and starts a fresh context window. You can monitor [context window usage](https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context#_monitor-context-window-usage) in the chat input box.
+> - Find more Power BI skills in [aka.ms/powerbi-agentic](https://aka.ms/powerbi-agentic)
 
 ### Review the skill instructions
 

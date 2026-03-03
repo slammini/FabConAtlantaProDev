@@ -116,7 +116,7 @@ This lab shows how AI can supercharge your Power BI development — from batch-e
     ```
 2. Observe how the AI agent works
     
-    **GitHub Copilot** should load the`powerbi-tmdl` skill automatically - you should see a reference to it in the chat output. This is because the skill files in `.github/skills/` are detected when working with TMDL content.    
+    **GitHub Copilot** should load the `powerbi-tmdl` skill automatically - you should see a reference to it in the chat output. This is because the skill files in `.github/skills/` are detected when working with TMDL content.    
 
     ![copilot-skill-loaded](resources/img/copilot-skill-loaded.png)
 

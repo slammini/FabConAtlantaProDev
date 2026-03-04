@@ -30,7 +30,7 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 3. Choose a folder (e.g. `c:\temp\lab1`) and select **Save as type**: `Power BI Project Files (*.pbip)`
 4. Name it: `Sales.pbip` and click Save. **Power BI Desktop** will save your work as a PBIP folder instead of a single PBIX file.
 
-5. You can recognize a Power BI Project by the **expanded title bar** in Desktop, which allows also allows you to identify and open the PBIP folder directly in Windows Explorer.
+5. You can recognize a Power BI Project by the **expanded title bar** in Desktop, which also allows you to identify and open the PBIP folder directly in Windows Explorer.
 
     ![flyout](resources/img/flyout.png)
 
@@ -43,7 +43,7 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
     ├── .gitignore
     └── Sales.pbip
     ```
-    PBIP mimics the experience you get in service when you publish a PBIX - unless its a live connect report, you always get two items in the workspace after publishing a PBIX report: a report and semantic model.
+    PBIP mimics the experience you get in the service when you publish a PBIX - unless its a live connect report, you always get two items in the workspace after publishing a PBIX report: a report and semantic model.
 
 > [!TIP]
 > * The provided PBIX file uses mock data sourced from CSV files hosted in a public location. When prompted for authentication, select **Anonymous** - the data should refresh without any errors.
@@ -162,7 +162,7 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 
     ![vscode-git-after-commit](resources/img/vscode-git-after-commit.png)
 
-    This is very useful to understand and review changes you made in the past. That's why its an important best practice to always provide a eaningfull message to commits - they can help you quickly navigate and understand the purpose of the change.
+    This is very useful to understand and review changes you made in the past. That's why its an important best practice to always provide a meaningful message to commits - they can help you quickly navigate and understand the purpose of the change.
    
 > [!TIP]
 > It’s important to pause and reflect on this: using Git lets you see, in detail, exactly what Power BI changes in the underlying code files. Understanding this is key-because if you ever want to automate something in the future, you can simply perform the action in the UI and inspect the resulting changes to learn precisely what needs to be modified.
@@ -284,7 +284,7 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 | **Best for**            | Initial publish or when data needs to be pushed                                                                  | Iterative development - e.g. fixing a DAX measure without waiting for a full data refresh or publishing a new report page without affecting the semantic model                                  |
 
 > [!IMPORTANT]
-> PBIP publish using **Fabric extension** can significantly **boosts development efficiency**. For example, when making a simple update like fixing a DAX measure or updating a report page, you can publish only the code definition and skip the data entirely. Always publishing the semantic model data may force you to ensure a data refresh to avoid impacting end users consuming the semantic model.
+> PBIP publish using **Fabric extension** can significantly **boosts development efficiency**. For example, when making a simple update like fixing a DAX measure or updating a report page, you can publish only the code definition and skip the data entirely. Always publishing the semantic model data may require you to perform a data refresh to avoid impacting end users consuming the semantic model.
 
 ### Switch the semantic model of a PBIP report
 
@@ -296,7 +296,7 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 > Using multiple `*.pbir` files is particularly useful for easy toggling between local and remote semantic models, providing flexibility for development, testing, and iterative report design. More details in [definition.pbir](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#definitionpbir).
 
 
-1. Open the workspace and grab to a empty notepad the following attributes:
+1. Open the workspace and copy to an empty notepad the following attributes:
     * Workspace and semantic model name
   
         ![workspace and model name copy](resources/img/workspaceandmodelnames.png)
@@ -335,7 +335,7 @@ This exercise demonstrates how to configure a local Power BI report to connect e
     ![report live connect](resources/img/report-liveconnect.png)
 
 > [!TIP]
-> With this technique you can easily test a report against any semantic model running in the service. For example, test a report agaisnt a production semantic model with production data before publishing.
+> With this technique you can easily test a report against any semantic model running in the service. For example, test a report against a production semantic model with production data before publishing.
 
 ## 5. Semantic Modeling as Code with TMDL
 
@@ -620,7 +620,7 @@ Now that you know which property to modify in the PBIR JSON, let’s update it i
 
     ![vscode-python-script-run-output](resources/img/vscode-python-script-run-output.png)
 
-1. Open the `Sales.pbip` with **Power BI Desktop** and notice that all visuals in all pages got the title hidden.
+1. Open the `Sales.pbip` with **Power BI Desktop** and notice that all visuals on all pages have their titles hidden.
 
     ![pbir-notitle-report](resources/img/pbir-notitle-report.png)
 

@@ -13,7 +13,7 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
     
     ![preview features](resources/img/previewfeatures.png)
 
-* Ensure you have the following software:    
+* Ensure you have the following software installed:    
   * [Visual Studio Code](https://code.visualstudio.com/download)  
     * [TMDL extension](https://marketplace.visualstudio.com/items?itemName=analysis-services.TMDL)
     * [Microsoft Fabric extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric)
@@ -26,18 +26,15 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 ✅ **Goal**: Save your report as a PBIP project.
 
 1. Open [resources/Sales.pbix](resources/Sales.pbix) in **Power BI Desktop**.
-   
-> [!IMPORTANT]
-> * This PBIX file uses mock data sourced from CSV files hosted in a public location. When prompted for authentication, select **Anonymous** - the data should refresh without any errors.
-
 2. Go to **File > Save As**.
 3. Choose a folder (e.g. `c:\temp\lab1`) and select **Save as type**: `Power BI Project Files (*.pbip)`
-4. Name it: `Sales.pbip`
-5. **Power BI Desktop** now saves your work as a PBIP folder instead of a single PBIX file.
-6. You can recognize a Power BI Project by the **expanded title bar** in Desktop, which allows you to identify and open the associated folder directly in Windows Explorer.
+4. Name it: `Sales.pbip` and click Save. **Power BI Desktop** will save your work as a PBIP folder instead of a single PBIX file.
+
+5. You can recognize a Power BI Project by the **expanded title bar** in Desktop, which allows also allows you to identify and open the PBIP folder directly in Windows Explorer.
 
     ![flyout](resources/img/flyout.png)
-7. Although **Power BI Desktop** presents the experience as if you're working with a single file, you're actually editing two distinct components: the report and the semantic model, each stored in its own folder within the PBIP structure.
+
+6. Although **Power BI Desktop** presents the experience as if you're working with a single file, you're actually editing two distinct components: the report and the semantic model, each stored in its own folder within the PBIP structure.
    
     ```text
     Lab1/
@@ -46,6 +43,10 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
     ├── .gitignore
     └── Sales.pbip
     ```
+    PBIP mimics the experience you get in service when you publish a PBIX - unless its a live connect report, you always get two items in the workspace after publishing a PBIX report: a report and semantic model.
+
+> [!TIP]
+> * The provided PBIX file uses mock data sourced from CSV files hosted in a public location. When prompted for authentication, select **Anonymous** - the data should refresh without any errors.
 
 ## 2. Explore PBIP files and folders
 
@@ -58,28 +59,28 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
     | File/Folder                            | Description |
     |----------------------------------------|-------------|
     | `*.pbip`                               | Main entry point file for **Power BI Desktop**. Includes a reference to the Report folder. **Optional** file; **Power BI Desktop** can also open a report by opening the `definition.pbir`. |
-    | `*.Report/definition.pbir`             | Contains the overall report definition and key configuration settings such as folder version. Includes a reference to the **semantic model** — typically via a **relative byPath reference**, but can also use an **absolute byConnection reference** to connect to a model hosted in Fabric. |
+    | `*.Report/definition.pbir`             | Contains the overall report definition and key configuration settings such as folder version. Includes a reference to the **semantic model** - typically via a **relative byPath reference**, but can also use an **absolute byConnection reference** to connect to a model hosted in Fabric. |
     | `*.Report/definition`                  | Contains the report definition in [**PBIR format**](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-format), where each report object (pages, visuals, bookmarks, etc.) is organized into its own **folders** and **JSON files**. |
     | `*.SemanticModel/definition`           | Contains the semantic model definition in [**TMDL file format**](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-dataset#tmdl-format), where each semantic model object (tables, roles, cultures, etc.) is organized into its own **folders** and **TMDL documents** using the [**TMDL language**](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-overview?view=sql-analysis-services-2025). |
     | `*.SemanticModel/.platform`           | Fabric platform file for the semantic model. Contains properties such as `displayName`, `description`, and `logicalId` (required for deployment and Fabric Git integration). |
     | `*.Report/.platform`                  | Same as the semantic model `.platform` file, but the `displayName` property is also used to define the **Power BI Desktop** window title. |
     | `*.SemanticModel/.pbi/cache.abf`      | A **local cached copy** of the semantic model's data stored as an Analysis Services Backup File (ABF). Acts as a **user-specific cache** and **should not be shared** via Git. **Power BI Desktop** can open the PBIP without it, but the model will be empty, requiring a data refresh. You can safely drop this file whenever you wish to share your development without compromising the data in it.|
-1. Each file includes a `$schema` property at the top of the JSON document, which specifies the document's version. This property also helps clarify the meaning of other properties and can assist in detecting syntax errors when editing the files manually.
+1. Each JSON file includes a `$schema` property at the top of the document, which specifies the document's version. This property also helps clarify the meaning of other properties and can assist in detecting syntax errors when editing the files manually.
 
     ![pbip-schemas](resources/img/pbip-schemas.png)
 
     Learn more about PBIP JSON schemas in the [documentation](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#json-file-schemas).
 
 > [!TIP]
+> * One of the most important concepts to understand when working with PBIP is that ALL changes made by the tool is saved into some readable text file. You can use that to your advantage, specially when dealing with long and repetivive tasks.
 > * Simply being able to explore PBIP files using a file explorer or code editor is a significant advantage. For example, you no longer need to wait minutes for **Power BI Desktop** to open a PBIX just to review a measure's DAX code or to confirm which database your semantic model is connected to by inspecting a table's Power Query code - Just open the files and look at the code!
 > * All files and folders are documented in [PBIP documentation](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview) including references to their public [JSON-schemas](https://github.com/microsoft/json-schemas/tree/main/fabric). 
   
-
 ## 3. Version Control your PBIP
 
 ✅ **Goal**: Set up Git, initialize a repository for your PBIP project, track changes, commit, view history, and restore to a previous version.
 
-### First time using Git in machine? (skip if you already use Git)
+### Setup Git [skip if you already use Git]
 
 > [!IMPORTANT]
 > * You only need to do this once!
@@ -89,7 +90,14 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 
     ![git version](resources/img/git-version.png)
 
-2. All git commits are tagged with your name and email as an identifier. Check the current settings:
+2. All git commits are tagged with your name and email as an identifier. 
+   
+    Run the following commands:
+
+    ```bash
+    git config user.name
+    git config user.email
+    ```
 
     ![git config](resources/img/git-config.png)
 
@@ -102,8 +110,8 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 
 ### Initialize local Git Repo for the PBIP folder
 
-1. Open **Visual Studio Code** and go to **File > Open Folder...** to open the PBIP folder you saved in Exercise 1.
-1. Navigate to the **Source Control** tab and click **Initialize Repository** button:
+1. Open **Visual Studio Code** and go to **File > Open Folder...** to open the PBIP folder.
+2. Navigate to the **Source Control** tab and click **Initialize Repository** button:
 
     ![vscode git init](resources/img/vscode-git-init.png)
 
@@ -112,7 +120,7 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
     ![vscode git pending changes](resources/img/vscode-git-pending-changes.png)
 
 > [!IMPORTANT]
-> Once you initialize a Git repository, a `.git/` folder is created you can view in file explorer. Do not edit, modify, or delete any files inside the `.git` directory.
+> Once you initialize a Git repository, a `.git/` folder is created you can view in file explorer. Do not edit, modify, or delete any files inside the `.git` directory. **Visual Studio Code** automatically hides the `.git/` folder for you.
 
 ### First commit
 
@@ -134,9 +142,9 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 
 1. Open `Sales.pbip` in **Power BI Desktop** (if not already opened).
 1. Make a report change, for example move any visual to a different position
-1. Make a semantic model change, for example edit any measure and add a comment `/// Change in Desktop`
+1. Make a semantic model change, for example edit a measure and add a DAX comment such as `/// Change in Desktop`
 1. **Save** in **Power BI Desktop**
-1. Return to **Visual Studio Code** and open the **Source Control** tab. You'll see all the updated **PBIR** and **TMDL** files listed there, reflecting the changes you made in **Power BI Desktop**.
+1. Return to **Visual Studio Code** and open the **Source Control** tab. You'll see all the updated **PBIR** and **TMDL** files listed there, reflecting the all the changes you made in **Power BI Desktop**.
     
     ![vscode-git-changes](resources/img/vscode-git-changes.png)
 
@@ -150,9 +158,11 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 
     ![vscode-commit-changes](resources/img/vscode-commit-changes.png)
 
-1. Notice that a new entry appears in the **Graph** tab. When you click on it, you can see the changes made to each file.
+1. After commit, notice that a new entry appears in the **Graph** tab. When you click on it, you can see the commit changes made to each file.
 
     ![vscode-git-after-commit](resources/img/vscode-git-after-commit.png)
+
+    This is very useful to understand and review changes you made in the past. That's why its an important best practice to always provide a eaningfull message to commits - they can help you quickly navigate and understand the purpose of the change.
    
 > [!TIP]
 > It’s important to pause and reflect on this: using Git lets you see, in detail, exactly what Power BI changes in the underlying code files. Understanding this is key-because if you ever want to automate something in the future, you can simply perform the action in the UI and inspect the resulting changes to learn precisely what needs to be modified.
@@ -165,8 +175,9 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
     
     ![vscode-changes-destructive](resources/img/vscode-changes-destructive-2.png)
     
-1. Normally if working against a PBIX if you make such a change and Save, it's not possible to recover. Specially if the change is on the semantic model. Not with PBIP, because you are using Git you can always discard these changes and it will go back to how it was before the change and perform a full roll back of the entire project to a previous state.
-1. Click the **Discard All Changes** button in the Source Control panel to revert all uncommitted changes:
+    Normally if working against a PBIX if you make such a change and Save, it's not possible to recover. Not with PBIP, because when using Git you can always discard these changes and it will go back to how it was before the change and perform a full roll back of the entire project to a previous state.
+
+2. Click the **Discard All Changes** button in the Source Control panel to revert all uncommitted changes:
 
     ![vscode discard changes](resources/img/vscode-discard-changes.png)
 
@@ -174,19 +185,24 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 
     ![vscode discard confirm](resources/img/vscode-discard-confirm.png)
 
-1. The destructive change you performed in the first step has now been undone - **but only in the PBIP code files, not in Power BI Desktop**. **Power BI Desktop** does not automatically detect changes made through external tools or direct file edits. To see the updated state reflected in the application, you need to **restart Power BI Desktop**.
-1. Go back to **Power BI Desktop** and close the application **without saving**. If you choose to save, the destructive change will be written back to the code files, because that modification still exists in the current in-memory state of **Power BI Desktop**.
-1. Re-Open `Sales.pbip` in **Power BI Desktop**
-1. Notice that the destructive change has been reverted. If you deleted a semantic model table, its data is lost because Git does not track the `cache.abf` file. However, all of the table’s metadata is preserved, so you can always refresh the table to restore its data.
+3. The destructive change you performed in the first step has now been undone - **but only in the PBIP code files, not in Power BI Desktop**. 
+    
+    **Power BI Desktop** does not automatically detect changes made through external tools or direct file edits. To see the updated state reflected in the application, you need to **restart Power BI Desktop**.
+    
+4. Go back to **Power BI Desktop** and close the application **without saving**. 
+    
+    If you choose to save, the destructive change will be written back to the code files, because that modification still exists in the current in-memory state of **Power BI Desktop**.
+
+5. Re-Open `Sales.pbip` in **Power BI Desktop**
+6. Notice that the destructive change has been reverted. If you deleted a semantic model table, its data is lost because Git does not track the `cache.abf` file. However, all of the table’s metadata is preserved, so you can always refresh the table to restore its data.
 
 > [!IMPORTANT]
-> With Git, you can much safely experiment with developments, knowing you can always recover your work if needed. It’s a best practice to commit often, with each commit representing a clear unit of work (e.g., creating or editing a measure). This approach not only helps you track changes but also makes it easy to roll back or recover specific developments.
+> With Git, you can much safely experiment new developments, knowing you can always recover your work if needed. It’s a best practice to commit often, with each commit representing a clear unit of work (e.g., creating or editing a measure). This approach not only helps you track changes but also makes it easy to roll back or recover specific developments.
 
 ### Restore to previous commit
 
-1. One of the key benefits of using Git is the ability to switch between different versions of your development effortlessly—no need to maintain multiple PBIX files like `Report.pbix`, `Report-beforeNewMeasureX.pbix`, and so on. You can quickly navigate to the version of your project corresponding to a specific commit in your Git repository.
-1. Let's go back to the initial version of your project before any changes. 
-1. In **Source Control Graph** right-click the first commit and select **Create Branch...**
+1. One of the key benefits of using Git is the ability to switch between different versions of your development effortlessly - no need to maintain multiple PBIX files like `Report.pbix`, `Report-beforeNewMeasureX.pbix`, and so on. Using Git you can quickly navigate the commmit history and move to a previous state of your development.
+2. Let's go back to the initial version of your project before any changes. In **Source Control Graph** right-click the first commit and select **Create Branch...**
    
     ![vscode-new-branch-graph](resources/img/vscode-new-branch-graph.png)
 
@@ -194,16 +210,20 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 
     ![vscode-new-branch-name](resources/img/vscode-new-branch-name.png)
 
-1. Notice that now your **Source Control Graph** don't track the changes you did before. Git branches work directly on your project folder: when you switch branches.
-1. Close **Power BI Desktop** (without saving), then reopen `Sales.pbip` and observe that the Report and Semantic Model no longer include any of the previous changes.
-1. Git replaces the files in your folder with the version stored in that branch, letting you work on different versions without mixing them. 
-1. Switch back to the main branch and observe that all your changes have returned in the PBIP files.
+3. Notice that now your **Source Control Graph** don't include the changes you did before. Git branches work directly on the folder: when you switch branches it directly changes the folder files.
+4. Close **Power BI Desktop** (without saving), then reopen `Sales.pbip` and observe that the Report and Semantic Model no longer include any of the previous changes.
+    
+    Git replaces the files in your folder with the version stored in that branch, letting you work on different versions without mixing them. 
+
+5. Click the branch name in the bottom-left corner and select `main` to switch back to the `main` branch.
 
     ![vscode-git-switch-branch](resources/img/vscode-git-switch-branch.png)
 
+    Observe that all your changes have been restored in the PBIP files.
+
 > [!TIP]
 > - Git is an essential tool for Power BI developers working with PBIP files. It provides a safety net for experimenting, a clear audit trail of all changes, and the ability to collaborate with teammates. 
-> - Git branches let you work on different versions of your project at the same time, and you can easily switch between them without affecting each other. For example, create a branch each time you start a new development giving you the ability to work in isolation and always come back to the original version very esily while keeping your development going in the original branch. Learn more about branches in [Git Branches and Worktrees in VS Code](https://code.visualstudio.com/docs/sourcecontrol/branches-worktrees)
+> - Git branches let you work on different versions of your project at the same time, and you can easily switch between them without affecting each other. For example, create a branch each time you start a new development giving you the ability to work in isolation and always come back to the original version very esily while keeping your development going in the original branch. Learn more about branches in [Git Branches and Worktrees in VS Code](https://code.visualstudio.com/docs/sourcecontrol/branches-worktrees) or [Introduction to Git Branch](https://www.geeksforgeeks.org/git/introduction-to-git-branch/).
 
 ## 4. Publish Power BI Project to workspace
 
@@ -217,7 +237,7 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
    
    ![desktop publish](resources/img/desktopPublish.png)
 
-4. The workspace should now have a new report and semantic model inside.
+4. The workspace should now have a new report and semantic model (with data).
 
 ### Publish from Fabric VS Code extension
 
@@ -245,7 +265,12 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
     ![microsoft fabric extension success](resources/img/microsoftFabric-success.png)
 
 10. Confirm the semantic model got published to the workspace.
-11. Repeat the publish operation for the Report. Unlike semantic models, Power BI reports must be connected to a semantic model. The **Fabric extension** will prompt you to select the target semantic model in the workspace that the report will connect to.
+    
+    Notice that if you explore the semantic model in the workspace, there is no data in it. 
+
+11. Repeat the publish operation for the Report. 
+    
+    Unlike semantic models, Power BI reports must be connected to a semantic model. The **Fabric extension** will prompt you to select the target semantic model in the workspace that the report will connect to.
 
     ![microsoft fabric extension publish report](resources/img/microsoftFabric-publishreport.png)
 
@@ -253,13 +278,13 @@ Welcome to this lab where you'll get hands-on experience with the **Power BI Pro
 
 |                         | **Power BI Desktop Publish**                                                                                     | **Fabric VS Code Extension Publish**                                                                                         |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| **What gets published** | Everything — definitions + data                                                                                  | **Only definitions (metadata)** — no data is pushed                                                                          |
-| **Granularity**         | Publishes the report and semantic model together                                                                 | Granular control — you choose to publish the report, the semantic model, or both independently                               |
+| **What gets published** | Everything - definitions + data                                                                                  | **Only definitions (metadata)** - no data is pushed                                                                          |
+| **Granularity**         | Publishes the report and semantic model together. You cannot publish individually.                                                               | Granular control - you choose to publish the report, the semantic model, or both independently                               |
 | **API used**            | Traditional [PBIX publish API](https://learn.microsoft.com/en-us/rest/api/power-bi/imports/post-import-in-group) | [Fabric REST CRUD APIs](https://learn.microsoft.com/en-us/rest/api/fabric/core/items) |
-| **Best for**            | Initial publish or when data needs to be pushed                                                                  | Iterative development — e.g. fixing a DAX measure without waiting for a full data refresh                                    |
+| **Best for**            | Initial publish or when data needs to be pushed                                                                  | Iterative development - e.g. fixing a DAX measure without waiting for a full data refresh or publishing a new report page without affecting the semantic model                                  |
 
 > [!IMPORTANT]
-> The **Fabric extension** approach significantly **boosts development efficiency**. For example, when making a simple update like fixing a DAX measure or updating a report page, you can publish only the code definition and skip the data entirely.
+> PBIP publish using **Fabric extension** can significantly **boosts development efficiency**. For example, when making a simple update like fixing a DAX measure or updating a report page, you can publish only the code definition and skip the data entirely. Always publishing the semantic model data may force you to ensure a data refresh to avoid impacting end users consuming the semantic model.
 
 ### Switch the semantic model of a PBIP report
 
@@ -268,10 +293,10 @@ All Power BI reports must connect to a semantic model. When using the PBIP file 
 This exercise demonstrates how to configure a local Power BI report to connect either to a **local semantic model** running in **Power BI Desktop** or to a **remote semantic model** in a Fabric workspace by switching to **Live Connect** mode. 
 
 > [!TIP]
-> Using multiple `*.pbir` files is particularly useful for toggling between local and remote semantic models, providing flexibility for development, testing, and iterative report design. More details in [definition.pbir](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#definitionpbir).
+> Using multiple `*.pbir` files is particularly useful for easy toggling between local and remote semantic models, providing flexibility for development, testing, and iterative report design. More details in [definition.pbir](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#definitionpbir).
 
 
-1. Open the workspace and grab the following attributes:
+1. Open the workspace and grab to a empty notepad the following attributes:
     * Workspace and semantic model name
   
         ![workspace and model name copy](resources/img/workspaceandmodelnames.png)
@@ -309,16 +334,19 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 
     ![report live connect](resources/img/report-liveconnect.png)
 
+> [!TIP]
+> With this technique you can easily test a report against any semantic model running in the service. For example, test a report agaisnt a production semantic model with production data before publishing.
+
 ## 5. Semantic Modeling as Code with TMDL
 
-✅ **Goal**: Edit a semantic model using TMDL, reuse shared TMDL components, and edit TMDL directly on a workspace using the Fabric extension.
+✅ **Goal**: Edit a semantic model using TMDL, reuse shared TMDL components, and edit TMDL directly on a workspace using the [TMDL VS Code extension](https://marketplace.visualstudio.com/items?itemName=analysis-services.TMDL) and [Fabric VS Code extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric).
 
 ### Edit semantic model using TMDL
 
 1. Close **Power BI Desktop** and Open **Visual Studio Code**
 1. Go to **File > Open Folder...** and open the PBIP folder.
 1. Open file `Sales.SemanticModel/definition/tables/Sales.tmdl`
-1. Notice the TMDL code readability features provided by TMDL extension:
+1. Notice the TMDL code readability features provided by [TMDL extension](https://marketplace.visualstudio.com/items?itemName=analysis-services.TMDL):
    * **Code highlighting** - Easily identify different elements of TMDL code: types, values, expressions
     
         ![tmdl extension - code highlight](resources/img/tmdlextension-highlight.png)
@@ -373,13 +401,14 @@ This exercise demonstrates how to configure a local Power BI report to connect e
             lineageTag: c2ff8d96-2f03-4005-84df-91458625b73b
         ...
      ```
-1. The TMDL extension will highlight an error when a duplicate lineage tag is detected. Lineage tags must be unique within their scope — for example, two measures in the same table cannot share the same tag. Fix this by either entering a new unique identifier in the `lineageTag` property or using the TMDL extension's **code action** to generate a new lineage tag automatically.
+    
+    The TMDL extension will highlight an error when a duplicate lineage tag is detected. Lineage tags must be unique within their scope - for example, two measures in the same table cannot share the same lineage tag. Fix this by either entering a new unique identifier in the `lineageTag` property or using the TMDL extension's **code action** to generate a new lineage tag automatically.
 
     ![tmdl extension - new lineage tag](resources/img/tmdlextension-newlineagetag.png)
 
     Learn more about lineage tags in [lineage-tags-for-power-bi-semantic-models](https://learn.microsoft.com/en-us/analysis-services/tom/lineage-tags-for-power-bi-semantic-models).
 
-1.  Configure the `displayFolder` property on the three Quantity measures. 
+2.  Configure the `displayFolder` property on the three Quantity measures. 
     
     You can edit multiple lines at same time, by using VS Code [multi cursor](https://code.visualstudio.com/docs/editing/codebasics#_multiple-selections-multicursor) feature. Press the **ALT** key and click at the end of line of the `lineageTag` property value of each measure.
     
@@ -407,10 +436,10 @@ This exercise demonstrates how to configure a local Power BI report to connect e
         ...
      ```
 
-1. Save the edited files in **Visual Studio Code** and open the `Sales.pbip` with **Power BI Desktop** to verify the newly created measures.
+3. Save the edited files in **Visual Studio Code** and open the `Sales.pbip` with **Power BI Desktop** to verify the newly created measures.
 
 > [!TIP]
-> While this example was simple, it demonstrates the potential of direct TMDL editing for large code changes or simple refactorings. You can take advantage of everything code editors offer, such as keyboard shortcuts, code duplication with copy & paste, advanced find-and-replace with regular expressions, programmatic edits, and more.
+> While this example was simple, it demonstrates the potential of direct TMDL editing for large code changes or simple refactorings. You can take advantage of everything code editors offer, such as keyboard shortcuts, code duplication with copy & paste, advanced find-and-replace with regular expressions, programmatic edits, and AI autocompletion.
 
 ### Reuse semantic model objects using TMDL files
 
@@ -421,7 +450,7 @@ This exercise demonstrates how to configure a local Power BI report to connect e
     ![time intelligence calc group](resources/img/timeintelligence-calcgroup.png)
    
 > [!TIP]
-> The **TMDL folder structure makes it easy to reuse and collaborate while developing semantic models**. With TMDL you can maintain shared model components (e.g. calendar tables, calculation groups, roles,...) and quickly apply them to multiple semantic models by simply copy  files between semantic model code definitions.
+> - The **TMDL folder structure makes it easy to reuse and collaborate while developing semantic models**. With TMDL you can maintain shared model components (e.g. calendar tables, calculation groups, roles,...) and quickly apply them to multiple semantic models by simply copy files between semantic model code repositories.
 
 ### Edit TMDL using Fabric Extension
 
@@ -438,10 +467,9 @@ This exercise demonstrates how to configure a local Power BI report to connect e
    
     ![microsoftFabric-edit-definition](resources/img/microsoftFabric-edit-definition.png)
 
-    You may need to enable the [**Edit Item Definitions**](vscode://settings/Fabric.EditItemDefinitions) setting in the extension: Open Settings (Ctrl+,) and search: item definitions. Select **allow editing of item definition files in Fabric Workspaces views**
+    You may need to enable the [**Edit Item Definitions**](vscode://settings/Fabric.EditItemDefinitions) setting in the extension: Open Settings (`Ctrl+,`) and search: `item definitions`. Select **allow editing of item definition files in Fabric Workspaces views**
 
-1. Make a small edit — for example, create a new measure.
-1. **Save** the file. The **Fabric extension** will push the updated definition directly to the workspace.  
+1. Create a new measure using TMDL and **Save** the file. The **Fabric extension** will push the updated definition directly to the workspace.  
 
     Notice the notification banner in the bottom-right:
 
@@ -449,16 +477,16 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 
 1. Confirm the change got applied to the semantic model in the workspace
 
-    You can open the item from **Visual Studio Code** by right-click the item and select **Open in Fabric...**
+    You can open the semantic model in Fabric workspace from **Visual Studio Code** by right-click the item and select **Open in Fabric...**
 
     ![microsoftFabric-open-item](resources/img/microsoftFabric-open-item.png)
 
 > [!TIP]
-> Editing TMDL through the **Fabric extension** allows you to make quick, targeted changes to a semantic model in a workspace **without needing Power BI Desktop or a local PBIP copy**. This is especially useful for hotfixes or quick adjustments in development/test workspaces.
+> Editing TMDL through the **Fabric extension** allows you to make quick, targeted changes to a semantic model in a workspace **without needing Power BI Desktop or a local PBIP copy**. This is especially useful for hotfixes or quick adjustments in development/test workspaces or a bulk find & replace operation.
 
 ## 6. Report as Code with PBIR
 
-✅ **Goal**: Map a report object to a PBIR file, identify changes, batch apply changes using a script, and edit PBIR directly on a workspace using the Fabric extension.
+✅ **Goal**: Map a report object to a PBIR file, identify changes, batch apply changes using a script, and edit PBIR directly on a workspace using the [Fabric extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric).
 
 ### Edit Report using PBIR
 
@@ -484,29 +512,33 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 
    ![pbir-find report object](resources/img/pbirdemo-findobjectname.png)
    
+   Using **Copy object name** can help you easily identify the location the report object (visual, page, filter, bookmark,...) in the PBIR folder.
+
 1. Open the matched file for edit.
 1. Mouse-hover the `height` property and notice that **Visual Studio Code** shows a tooltip that explains the property.
 
     ![pbir-schematooltip](resources/img/pbirdemo-schematooltip.png)
 
-    This is because PBIR JSON files include a JSON schema declaration at the top of the document with the `$schema` property. Additionally, it provides built-in IntelliSense and validation when editing with code editors like Visual Studio Code.
+    This is because all PBIR JSON files include a JSON schema declaration at the top of the document with the `$schema` property. Additionally, it provides built-in IntelliSense and validation when editing with code editors like Visual Studio Code.
 
-    If you misspell a property name, the code editor will flag the error and show an explanatory tooltip or entry in the Problems pane:
+    If you misspell a property name, the code editor will flag the error and show an explanatory tooltip or entry in the Problems pane (`CTRL + SHIFT + M`):
 
     ![pbir-schemaerror](resources/img/pbirdemo-schemaerror.png)
 
     Learn more about PBIR schemas in [documentation](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop#pbir-json-schemas).
 
-1. Navigate to the JSON property `visual.visualContainerObjects.title` and notice that the property `show` is configured as `false`. This is the configuration that determines that the visual title is hidden.
+1. Navigate to the JSON property `visual.visualContainerObjects.title` and notice that the property `show` is configured as `false`. 
 
     ![pbir-title hidden property](resources/img/pbir-titlehiddenproperty.png)
+
+    This is the PBIR JSON configuration that determines that the visual title is hidden.
 
 ### Edit with script
 
 Now that you know which property to modify in the PBIR JSON, let’s update it in bulk using a script.
 
 1. Close **Power BI Desktop**
-1. Create a new **PowerShell** script file named `HideVisualTitles.py` side by side with the `Sales.pbip`.
+1. Create a new **Python** script file named `HideVisualTitles.py` side by side with the `Sales.pbip`.
 
     ```text
     Lab1/
@@ -516,7 +548,7 @@ Now that you know which property to modify in the PBIR JSON, let’s update it i
     └── Sales.pbip
     ```
 
-    Copy and paste the following PowerShell code to `HideVisualTitles.py`
+    Copy and paste the following code to `HideVisualTitles.py`
     
     ```python
     import json
@@ -549,7 +581,7 @@ Now that you know which property to modify in the PBIR JSON, let’s update it i
 
             title = container_objects["title"]
 
-            # title can be a list (array) — access the first element
+            # title can be a list (array) - access the first element
             if isinstance(title, list):
                 title_obj = title[0]
             else:
@@ -592,8 +624,8 @@ Now that you know which property to modify in the PBIR JSON, let’s update it i
 
     ![pbir-notitle-report](resources/img/pbir-notitle-report.png)
 
-> [!IMPORTANT]
-> This example is simple and educational - it could have been more efficient to hide titles using multi-select on each page. However, if you needed to apply the same change across 50 reports with an average of 10 pages each, automating it with a script like the one above and running it against all PBIR report files would be far more efficient.
+> [!TIP]
+> This example is simple and educational - it could have been more efficient to hide titles using multi-select on each page. However, if you needed to apply the same change across 50 reports with an average of 10 pages each, automating it with a script and running it against all PBIR report files would be far more efficient. And remember that you can use AI to help you write the script code.
 
 ### Edit PBIR using Fabric Extension
 

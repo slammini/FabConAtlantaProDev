@@ -16,11 +16,11 @@ By the end of this workshop, you will:
 
 ## Agenda
 
-| Topic                                    | Content                                                                                                    | Labs                                                              
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- 
-| **Power BI Project (PBIP) fundamentals** | • PBIP fundamentals<br>• Git basics<br>• Semantic Modeling as code with TMDL<br>• Report as code with PBIR | [Lab 1 - Power BI Project (PBIP) fundamentals](.labs/lab1/lab.md) 
-| **Power BI & CI/CD**                     | • GitHub Collaboration Workflows<br>• CI/CD Pipelines                                                      | [Lab 2 - Power BI & CI/CD](.labs/lab2/lab.md)                     
-| **Power BI Development with AI**         | • Power BI Development with AI <br>• Agentic development                                                   | [Lab 3 - Power BI Development with AI](.labs/lab3/lab.md)         
+| Topic                                    | Content                                                                                                    | Labs
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------- | -----------------------------------------------------------------
+| **Power BI Project (PBIP) fundamentals** | • PBIP fundamentals<br>• Git basics<br>• Semantic Modeling as code with TMDL<br>• Report as code with PBIR | [Lab 1 - Power BI Project (PBIP) fundamentals](.labs/lab1/lab.md)
+| **Power BI & CI/CD**                     | • GitHub Collaboration Workflows<br>• CI/CD Pipelines                                                      | [Lab 2 - Power BI & CI/CD](.labs/lab2/README.md)
+| **Power BI Development with AI**         | • Power BI Development with AI <br>• Agentic development                                                   | [Lab 3 - Power BI Development with AI](.labs/lab3/lab.md)
 
 ## Requirements
 
@@ -29,11 +29,12 @@ By the end of this workshop, you will:
     - You can use your existing organizational tenant but you must have admin permissions.
     - Power BI Pro license
     - Access to a Fabric Capacity or [Trial](https://learn.microsoft.com/en-us/fabric/fundamentals/fabric-trial)
-    - Access to create and authorize a service principal in Fabric for automated CICD deployment. See [Create a Microsoft Entra ID app](https://learn.microsoft.com/en-us/rest/api/fabric/articles/get-started/create-entra-app).    
+    - Access to create and authorize a service principal in Fabric for automated CI/CD deployment. See [Create a Microsoft Entra ID app](https://learn.microsoft.com/en-us/rest/api/fabric/articles/get-started/create-entra-app).
   - [GitHub account](https://github.com/signup)
   - [GitHub Copilot Free or Pro](https://github.com/github-copilot/pro)
 - Software
   - [Power BI Desktop](https://pbi.onl/download)
   - [Visual Studio Code](https://code.visualstudio.com/download)
-  - [Git for Windows](https://gitforwindows.org/)   
-  - [Python 3.12](https://www.python.org/downloads/release/python-3120/)
+  - [Git for Windows](https://gitforwindows.org/)
+  - [Python 3.12](https://www.python.org/downloads/release/python-31213/)
+    - [Python 3.12 in the Windows Store](https://apps.microsoft.com/detail/9ncvdn91xzqp)

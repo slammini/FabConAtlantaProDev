@@ -229,6 +229,25 @@ pip install -r requirements.txt
 This installs `fabric-cicd` and `python-dotenv` as well as any other transient dependencies into your active Python environment.
 
 > [!TIP]
+> If you have multiple Python versions installed and the `pip` command above installs packages into the wrong environment, use the following alternative to target a specific interpreter:
+>
+> ```bash
+> python -m pip install -r requirements.txt
+> ```
+>
+> Or, if you need to target Python 3.12 explicitly by its full path (common on Windows where both Python 3.11 and 3.12 are installed side-by-side), use:
+>
+> ```bash
+> # Windows example
+> C:\Users\<YourUser>\AppData\Local\Programs\Python\Python312\python.exe -m pip install -r requirements.txt
+>
+> # macOS / Linux example
+> /usr/local/bin/python3.12 -m pip install -r requirements.txt
+> ```
+>
+> `fabric-cicd` requires **Python 3.12**, so make sure the interpreter you use is 3.12.
+
+> [!TIP]
 > If you have multiple Python versions installed and want to avoid confusion, consider using a virtual environment for this project. The Python extension in VS Code can automatically create and manage **virtual environments** for you. Learn more in the [VS Code Python documentation](https://code.visualstudio.com/docs/python/environments).
 
 ### Run your first local deployment

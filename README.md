@@ -24,6 +24,9 @@ By the end of this workshop, you will:
 
 ## Requirements
 
+> [!IMPORTANT]
+> * We can provide a Fabric Account and GitHub Copilot license for this workshop. Request access in this [form](https://forms.office.com/e/47Jx6CqPSq)
+
 - Licenses
   - Access to a Fabric / Power BI tenant
     - You can use your existing organizational tenant but you must have admin permissions.
@@ -36,6 +39,4 @@ By the end of this workshop, you will:
   - [Power BI Desktop](https://pbi.onl/download)
   - [Visual Studio Code](https://code.visualstudio.com/download)
   - [Git for Windows](https://gitforwindows.org/)
-  - [Python 3.12](https://www.python.org/downloads/release/python-31213/)
-    - [Python 3.12 in the Windows Store](https://apps.microsoft.com/detail/9ncvdn91xzqp)
-  - Use this form to request for Fabric and Copilot license: https://forms.office.com/e/47Jx6CqPSq
+  - [Python 3.12](https://apps.microsoft.com/detail/9ncvdn91xzqp)

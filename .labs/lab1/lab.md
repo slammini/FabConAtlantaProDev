@@ -21,8 +21,8 @@ This lab gives you hands-on experience with the **Power BI Project (PBIP)** form
 | 2 | [Explore PBIP files and folders](#2-explore-pbip-files-and-folders) | Understand the key files and folders that make up a PBIP project |
 | 3 | [Version Control your PBIP](#3-version-control-your-pbip) | Initialize a Git repository, commit changes, view history, and restore previous versions |
 | 4 | [Publish Power BI Project to workspace](#4-publish-power-bi-project-to-workspace) | Deploy your PBIP project to a Fabric workspace |
-| 5 | [Semantic Modeling as Code with TMDL](#5-semantic-modeling-as-code-with-tmdl) | Read and edit the semantic model definition using TMDL files |
-| 6 | [Report as Code with PBIR](#6-report-as-code-with-pbir) | Read and edit the report definition using PBIR JSON files |
+| 5 | [Semantic Modeling as Code with TMDL](#5-semantic-modeling-as-code-with-tmdl) | Read and edit the semantic model definition using TMDL |
+| 6 | [Report as Code with PBIR](#6-report-as-code-with-pbir) | Read and edit the report definition using PBIR |
 
 ## 🛠️ Prerequisites
 

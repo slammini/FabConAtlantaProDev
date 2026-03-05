@@ -24,9 +24,6 @@ This lab gives you hands-on experience with the **Power BI Project (PBIP)** form
 | 5 | [Semantic Modeling as Code with TMDL](#5-semantic-modeling-as-code-with-tmdl) | Read and edit the semantic model definition using TMDL files |
 | 6 | [Report as Code with PBIR](#6-report-as-code-with-pbir) | Read and edit the report definition using PBIR JSON files |
 
-> [!TIP]
-> If you are short on time, sections 5 and 6 are the most representative of the "everything-as-code" mindset that underpins the rest of the workshop. Sections 1–4 build the foundation you will need for later labs.
-
 ## 🛠️ Prerequisites
 
 * Enable the following **Power BI Desktop** preview features:

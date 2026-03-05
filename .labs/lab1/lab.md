@@ -1,8 +1,31 @@
-# Lab - Power BI Project (PBIP) fundamentals
+# Lab 1 — Power BI Project (PBIP) Fundamentals
 
 ⏱️ Duration: 120 minutes
 
-Welcome to this lab where you'll get hands-on experience with the **Power BI Project (PBIP)** format. This workshop is designed to help you understand the PBIP folder structure, set up Git source control, publish to a workspace, and work with **TMDL** and **PBIR** files.
+This lab gives you hands-on experience with the **Power BI Project (PBIP)** format. You will learn how PBIP files are organized on disk, set up Git source control for a project, publish to a Fabric workspace, and edit semantic models and reports directly as code using **TMDL** and **PBIR**.
+
+## What you will learn
+
+- How the **PBIP folder structure** maps to the report and semantic model you see in Power BI Desktop and the Fabric service
+- How to use **Git** to version-control a Power BI project, track changes, and restore previous versions
+- How to **publish a PBIP** to a Fabric workspace from the command line
+- How to read and edit a semantic model as code with **TMDL** (Tabular Model Definition Language)
+- How to read and edit a report as code with **PBIR** (Power BI Report format)
+
+## Lab structure
+
+| # | Section | Notes |
+| - | ------- | ----- |
+| 0 | [Prerequisites](#prerequisites) | Enable preview features in Power BI Desktop and install required software |
+| 1 | [Save a PBIX to PBIP Format](#1-save-a-pbix-to-pbip-format) | Convert an existing PBIX file into the PBIP folder structure |
+| 2 | [Explore PBIP files and folders](#2-explore-pbip-files-and-folders) | Understand the key files and folders that make up a PBIP project |
+| 3 | [Version Control your PBIP](#3-version-control-your-pbip) | Initialize a Git repository, commit changes, view history, and restore previous versions |
+| 4 | [Publish Power BI Project to workspace](#4-publish-power-bi-project-to-workspace) | Deploy your PBIP project to a Fabric workspace |
+| 5 | [Semantic Modeling as Code with TMDL](#5-semantic-modeling-as-code-with-tmdl) | Read and edit the semantic model definition using TMDL files |
+| 6 | [Report as Code with PBIR](#6-report-as-code-with-pbir) | Read and edit the report definition using PBIR JSON files |
+
+> [!TIP]
+> If you are short on time, sections 5 and 6 are the most representative of the "everything-as-code" mindset that underpins the rest of the workshop. Sections 1–4 build the foundation you will need for later labs.
 
 ## 🛠️ Prerequisites
 

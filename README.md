@@ -9,8 +9,10 @@ By the end of this workshop, you will:
 
 ## Get started
 
-- Clone or download this repository to your machine.
+- Download this repository to your machine.
+  
   ![clone-repository](.labs/lab1/resources/img/clone-repository.png)
+  
 - Ensure you met all the [Requirements](#requirements) before starting the labs.
 - Open the lab documents in your browser for an improved reading experience.
 
@@ -30,6 +32,7 @@ By the end of this workshop, you will:
 - Licenses
   - Access to a Fabric / Power BI tenant
     - You can use your existing organizational tenant but you must have admin permissions.
+      - You can also create your own tenant using the [Microsoft 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
     - Power BI Pro license
     - Access to a Fabric Capacity or [Trial](https://learn.microsoft.com/en-us/fabric/fundamentals/fabric-trial)
     - Access to create and authorize a service principal in Fabric for automated CI/CD deployment. See [Create a Microsoft Entra ID app](https://learn.microsoft.com/en-us/rest/api/fabric/articles/get-started/create-entra-app).

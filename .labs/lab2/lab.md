@@ -510,7 +510,7 @@ Since any push to `main` triggers an automated deployment to production, it is c
 
     ![create branch ruleset](resources/img/gh-branchprotection-create.png)
 
-3. Enable the rules shown below. Under **Require status checks to pass**, search for and select the **bpa** workflow.
+3. Enable the rules shown below. Under **Require status checks to pass**
 
     ![branch protection rules](resources/img/gh-branchprotection-rules.png)
 

@@ -45,14 +45,7 @@ This lab gives you hands-on experience with the **Power BI Project (PBIP)** form
 
 ✅ **Goal**: Save your pbix as a PBIP project.
 
-When you save your work as a Power BI Project (PBIP), report and semantic model item definitions are saved as individual plain text files in a simple, intuitive folder structure.
-
-Saving your work as a project has the following benefits:
-    - Text editor support
-    - Folder structure transparency 
-    - Source control ready 
-    - CI/CD support 
-    - Programmatic generation and editing item definitions
+When you save your work as a Power BI Project (PBIP), both reports and semantic models are stored as individual plain‑text files organized in a clear, intuitive folder structure, making the contents easy to inspect and modify. This project‑based format unlocks text editor support, full transparency into report and model definitions, and first‑class compatibility with source control systems, while also enabling CI/CD pipelines and programmatic generation or editing of items—significantly improving collaboration, automation, and developer‑centric workflows compared to a single binary file.
 
 To learn more about about PBIP: https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview
 

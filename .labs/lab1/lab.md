@@ -383,6 +383,8 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 
 ✅ **Goal**: Edit a semantic model using TMDL, reuse shared TMDL components, and edit TMDL directly on a workspace using the [TMDL VS Code extension](https://marketplace.visualstudio.com/items?itemName=analysis-services.TMDL) and [Fabric VS Code extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric).
 
+Tabular Model Definition Language (TMDL) is a human‑readable, code‑based language that represents the full structure of a Power BI semantic model as plain text, including tables, measures, relationships, and model properties. In this workshop section, we will take a hands‑on approach to semantic modeling as code by editing our model in Visual Studio Code using the TMDL VS Code extension, exploring how to view and modify TMDL scripts in TMDL View on the web, and editing TMDL directly in a Fabric workspace using the Fabric VS Code extension, covering end‑to‑end workflows from local development to in‑workspace editing.
+
 ### Edit semantic model using TMDL
 
 1. Close **Power BI Desktop** and Open **Visual Studio Code**
@@ -525,6 +527,26 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 
 > [!TIP]
 > Editing TMDL through the **Fabric extension** allows you to make quick, targeted changes to a semantic model in a workspace **without needing Power BI Desktop or a local PBIP copy**. This is especially useful for hotfixes or quick adjustments in development/test workspaces or a bulk find & replace operation.
+
+### Edit TMDL using TMDL View 
+
+TMDL View in Power BI Desktop allows you to view, edit, and apply changes to a semantic model directly in Power BI using Tabular Model Definition Language (TMDL). Unlike editing TMDL files externally in VS Code, where changes require restarting Power BI Desktop to reload the model, TMDL View applies changes directly to the open model.
+
+1. In Power BI Desktop, select the TMDL view icon located along the left side of the window
+   <img width="958" height="501" alt="TMDLView" src="https://github.com/user-attachments/assets/bf595ebe-f86b-451f-9ded-bc4c876fa4d2" />
+
+2. Script any semantic model object such as a table, measure, or column by selecting the objects from the Data pane and dragging them onto the code editor:
+   <img width="958" height="502" alt="script TMDL View" src="https://github.com/user-attachments/assets/74259f7a-b98a-44f6-ae36-2529aa6b0c60" />
+   This will generate a TMDL Script for the selected semantic model object. A TMDL Script includes statement and the corresponding TMDL object definition that describes the desired state of the model object.
+
+   Alternatively, you can right-click an object in the Data view and select Script TMDL to new tab or to the clipboard, shown in the following image:
+
+   <img width="232" height="82" alt="script right click" src="https://github.com/user-attachments/assets/8db260b1-7c52-4252-a195-298dddd31983" />
+
+
+
+
+
 
 ## 6. Report as Code with PBIR
 

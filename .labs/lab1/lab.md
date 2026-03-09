@@ -543,7 +543,28 @@ TMDL View in Power BI Desktop allows you to view, edit, and apply changes to a s
 
    <img width="332" height="354" alt="scriptToTMDL" src="https://github.com/user-attachments/assets/e58393cd-bd3b-4833-b6db-332729a115e8" />
 
-3. Select a different semantic object (this can be a different table, measure or column) and drag it into the editor. A new tab will be created with the TMDL Script for that object. 
+3. Select a different semantic object (this can be a different table, measure or column) and drag it into the editor. A new tab will be created with the TMDL Script for that object. If you save your changes in Power BI Desktop, your scripts will be saved as part of your PBIP under the folder TMDLScripts.
+4.  We are now going to create a new role usign TMDL. Script your Roles by dragging Roles from the Data pane to your editor. Add a new role for Australia and click on preview to preview the changes to the semantic model as a TMDL code diff. 
+   <img width="959" height="503" alt="RoleAustraliaPreview" src="https://github.com/user-attachments/assets/9372f187-b15c-4e88-b281-0b584aded482" />
+   Wihtout closing the preview, add a new role for United Kingdom. Select the "Update preview" burron to refresh the preview after changes. 
+<img width="958" height="502" alt="Preview Out Of date" src="https://github.com/user-attachments/assets/b79ce403-b838-418b-b070-aba93e3be538" />
+5. Click on apply to apply changes to your model
+6. Script all your measures by dragging measures from the Data pane to the model. Some of the measures use euros while other use dollars. We are now going to standarize the currency format so that all measure use the dollar format instead. Click on the Replace option (CTRL+F) from the ribbon to replace € with $. Preview your changes and apply them to the model. 
+<img width="959" height="502" alt="standarize currency" src="https://github.com/user-attachments/assets/f2e49027-572a-4506-a972-56ffdf6d2e40" />
+7. We are now going to rename all columns of the model to lower case. Script your whole model and enter the following patterns in the find and replace fields and select Replace All. Ensure the Regular Expression option is enabled and enter the following patterns:
+Action	Pattern/Replacement
+Find	(^\s+column\s+)(.+)
+Replace	$1\L$2
+<img width="959" height="503" alt="RegEx" src="https://github.com/user-attachments/assets/023ea5b6-3d08-4c19-a9e8-0b9fef684409" />
+
+
+
+
+
+
+
+
+
 
 
 

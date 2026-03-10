@@ -723,11 +723,6 @@ Now that we understand the PBIR structure and have seen how changes made in Powe
 
     This is the PBIR JSON configuration that determines that the visual title is hidden.
 
-### Edit with AI 
-In this exercise, we'll see how AI combined with PBIR can help us edit reports much more effectively.
-
-
-
 ### Edit with script
 
 Now that you know which property to modify in the PBIR JSON, let’s update it in bulk using a script.

@@ -637,42 +637,6 @@ In this section, we'll focus on report as code with PBIR. We'll do a deep dive i
 To learn more: [Power BI Desktop project report folder](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop)
 
 ### Understand PBIR
-1. Open `Sales.pbip` with **Vs Code** and look at the files and subfolders inside <project name>.Report:
-
-![alt text](image.png)
-
-2. Open and inspect the definition folder. Inside, you'll find:
-
-    2.1. A pages folder containing one subfolder for each page in your report. Each page folder includes a visuals folder, which in turn contains a subfolder for every visual on that page. Inside each visual's subfolder, you'll find a visual.json file with the full definition of that visual.
-
-
-3. Open and inspect the pages.json file. This file contains all the pages in your report
-
-4. Open and inspect report.json. This file contains the report definition in the Power BI Report Legacy format (PBIR-Legacy) and doesn't support external editing.
-
-5. .platfrom. Fabric platform file that holds properties vital for establishing and maintaining the connection between Fabric items and Git.
-  
-6. Open and inspect definition.pbir. This file contains the overall definition of a report and core settings. This file also hold the reference to the semantic model used by the report. Power BI Desktop can open a PBIR file directly, just the same as if the report were opened from a PBIP file. Opening a PBIR file also opens the semantic model alongside if there's a relative reference using byPath.
-
-### Reflect Power BI changes in PBIP Report Files
-
-1. Go to Power BI Desktop and make any change to any visual. For example, resize and reposition the KPI table on the KPI page. Save your changes in Power BI Desktop.
-
-![alt text](image-1.png)
-
-2. Go to Vs Code and look at the changes. You can see the changes in the visual.json for the modified visual. Commit the changes: 
-
-![alt text](image-2.png)
-
-3. Let's now go back to Power BI Desktop and create a new page with a new visual:
-
-![alt text](image-4.png)
-
-4. Once you are ready, save your changes and go back to VS Code to explore the modified files. Inspect the added and modified files
-
-![alt text](image-5.png)
-
-### Understand PBIR
 
 1. Open `Sales.pbip` with **VS Code** and explore the files and subfolders inside the `<project name>.Report` folder.
 
@@ -691,8 +655,6 @@ To learn more: [Power BI Desktop project report folder](https://learn.microsoft.
 5. Open and inspect `.platform`. This is a Fabric platform file that holds properties vital for establishing and maintaining the connection between Fabric items and Git.
 
 6. Open and inspect `definition.pbir`. This file contains the overall report definition and core settings, including the reference to the semantic model used by the report. Power BI Desktop can open a PBIR file directly, just like opening from a PBIP file. Opening a PBIR file also opens the semantic model if there's a relative reference using `byPath`.
-
----
 
 ### Reflect Power BI Changes in PBIP Report Files
 

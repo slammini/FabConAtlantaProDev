@@ -385,6 +385,52 @@ This exercise demonstrates how to configure a local Power BI report to connect e
 
 Tabular Model Definition Language (TMDL) is a human‑readable, code‑based language that represents the full structure of a Power BI semantic model as plain text, including tables, measures, relationships, and model properties. In this workshop section, we will take a hands‑on approach to semantic modeling as code by editing our model in Visual Studio Code using the TMDL VS Code extension, exploring how to view and modify TMDL scripts in TMDL View on the web, and editing TMDL directly in a Fabric workspace using the Fabric VS Code extension, covering end‑to‑end workflows from local development to in‑workspace editing.
 
+
+### Reflect Power BI changes in PBIP Semantic Modeling files
+
+1. Open the `Sales.pbip` file with **Power BI Desktop**.
+
+2. From **Diagram View**, rearrange the position of the tables. This is a visual-only change, but it is still tracked as part of the semantic model.
+   Initial:
+   <img width="364" height="319" alt="Diagram Layout 1" src="https://github.com/user-attachments/assets/b4ccb8ed-ae58-4ea3-b9ca-f87e4d8ba644" />
+   Final:
+   <img width="959" height="501" alt="Diagram Layout 2" src="https://github.com/user-attachments/assets/23e937e7-b7f1-42ea-8846-61ad8a0b273c" />
+
+4. Create a new calculated column in the **Customer** table.
+    1. Select the **Customer** table.
+    1. Click **New column**.
+    1. Enter the following DAX expression:
+       
+```DAX
+    Age Range Order =
+    SWITCH(
+        TRUE(),
+        Customer[Age] < 25, 1,
+        Customer[Age] < 35, 2,
+        Customer[Age] < 45, 3,
+        Customer[Age] < 55, 4,
+        Customer[Age] < 65, 5,
+        6
+    )
+    ```
+
+<img width="957" height="503" alt="new calculated column" src="https://github.com/user-attachments/assets/1311474f-2c12-4853-9bff-bf348c463187" />
+
+    > [!NOTE]  
+    > Changes are only written to the PBIP files after you explicitly **save** them in Power BI Desktop. Until then, the PBIP files remain unchanged.
+
+
+
+4. Save your changes in **Power BI Desktop**, then close it.
+
+5. Open **Visual Studio Code** and go to source control. Notice how the changes you made in Power BI Desktop are now reflected in the PBIP files. In green you can see the lines that were added. In red you can see the lines that were deleted:
+
+<img width="955" height="503" alt="Diagram layour changes" src="https://github.com/user-attachments/assets/46c0cccc-f8ed-47cd-8b9c-f0f70da8cecc" />
+
+<img width="959" height="503" alt="calculated column changes" src="https://github.com/user-attachments/assets/62086739-74cf-428e-a11b-e73dd32646ad" />
+
+
+
 ### Edit semantic model using TMDL
 
 1. Close **Power BI Desktop** and Open **Visual Studio Code**
@@ -484,6 +530,8 @@ Tabular Model Definition Language (TMDL) is a human‑readable, code‑based lan
 
 > [!TIP]
 > While this example was simple, it demonstrates the potential of direct TMDL editing for large code changes or simple refactorings. You can take advantage of everything code editors offer, such as keyboard shortcuts, code duplication with copy & paste, advanced find-and-replace with regular expressions, programmatic edits, and AI autocompletion.
+
+ 
 
 ### Reuse semantic model objects using TMDL files
 

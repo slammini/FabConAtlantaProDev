@@ -640,7 +640,7 @@ To learn more: [Power BI Desktop project report folder](https://learn.microsoft.
 
 1. Open `Sales.pbip` with **VS Code** and explore the files and subfolders inside the `<project name>.Report` folder.
 
-   ![PBIR folder structure in VS Code](image.png)
+   ![PBIR folder structure in VS Code](resources/img/pbir-folder-vscode.png)
 
 2. Open and inspect the **definition** folder. Inside, you'll find:
 
@@ -660,19 +660,19 @@ To learn more: [Power BI Desktop project report folder](https://learn.microsoft.
 
 1. Go to Power BI Desktop and make any change to a visual. For example, resize and reposition the KPI table on the KPI page. Save your changes.
 
-   ![Resized KPI table in Power BI Desktop](image-1.png)
+   ![Resized KPI table in Power BI Desktop](resources/img/resize-kpi-table-pbi-desktop.png)
 
 2. Go to VS Code and review the changes. You'll see the modifications in the `visual.json` file for the updated visual. Commit the changes.
 
-   ![VS Code showing visual.json changes](image-2.png)
+   ![VS Code showing visual.json changes](resources/img/vscode-show-visual.png)
 
 3. Go back to Power BI Desktop and create a new page with a new visual.
 
-   ![New page with visual in Power BI Desktop](image-4.png)
+   ![New page with visual in Power BI Desktop](resources/img/new-page-visual-pbi-desktop.png)
 
 4. Save your changes and return to VS Code to explore the modified files. Inspect the added and modified files.
 
-   ![VS Code Source Control showing new and modified PBIR files](image-5.png)
+   ![VS Code Source Control showing new and modified PBIR files](resources/img/vscode-source-control-modified-pbir.png)
 
 
 

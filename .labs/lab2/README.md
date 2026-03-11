@@ -2,7 +2,7 @@
 
 This lab guides you through building a production-grade CI/CD pipeline for a Power BI project on GitHub. Starting from a pre-configured repository template, you will configure automated deployments using GitHub Actions, enforce quality gates with the Best Practice Analyzer, and practice the Pull Request workflow that ties it all together.
 
-No local setup is required — all you need is a GitHub account and the provided service principal credentials.
+No local setup is required for the main lab — all you need is a GitHub account and the provided service principal credentials. An optional appendix is available if you want to run deployments from your local machine.
 
 ## What you will learn
 

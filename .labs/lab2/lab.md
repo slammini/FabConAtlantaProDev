@@ -1,21 +1,18 @@
 # Lab - Power BI and CI/CD
 
-⏱️ Duration: 110 minutes
-
-In this lab you will set up a complete CI/CD pipeline for a Power BI project. You will work with a pre-configured repository template that includes Power BI project files (PBIP), a Python deployment script powered by `fabric-cicd`, and GitHub Actions workflows for automated deployment and quality checks.
+In this lab you will set up a complete CI/CD pipeline for a Power BI project. Starting from a pre-configured repository template, you will configure automated deployments using GitHub Actions, enforce quality gates with the Best Practice Analyzer, and practice the Pull Request workflow that ties it all together.
 
 ## Goals
 
 - Set up a working repository from a template and configure deployment credentials
 - Understand `fabric-cicd` as the recommended deployment tool for PBIP projects
-- Run a local deployment and verify results in a Fabric workspace
 - Automate deployments via GitHub Actions on every push to `main`
 - Use the Best Practice Analyzer (BPA) to enforce quality standards on Pull Requests
 - Experience a complete Pull Request workflow with automated BPA quality gates
 
 ## 0. Setup
 
-**Goal**: Get a working copy of the lab repository on your machine with all prerequisites in place.
+**Goal**: Create your own copy of the lab repository on GitHub and prepare the deployment credentials.
 
 ### Create a new GitHub repository from the template
 
@@ -32,52 +29,14 @@ In this lab you will set up a complete CI/CD pipeline for a Power BI project. Yo
 > [!TIP]
 > Creating a repository from a template gives you a clean copy with the full directory structure and all files, but without the template's commit history. Learn more in the [GitHub docs on template repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
 
-### Clone the repository to your machine
-
-1. On your new repository's page, click the green **Code** button and copy the HTTPS URL.
-
-    ![clone-url](resources/img/gh-new-repo-code.png)
-
-2. Open a terminal and clone the repository:
-
-    ```bash
-    git clone https://github.com/<YOUR-USER>/<YOUR-REPO>.git
-    ```
-
-3. Change into the repository directory and open it in **Visual Studio Code**:
-
-    ```bash
-    cd <YOUR-REPO>
-    code .
-    ```
-
-### Set up the Python extension in VS Code
-
-The deployment script requires **Python 3.12**. The easiest way to manage Python versions and run scripts in VS Code is through the official **Python extension**.
-
-1. Open the **Extensions** panel (`Ctrl+Shift+X`) and search for **Python**. Install the extension published by **Microsoft** if it is not already installed.
-
-    ![python-extension](resources/img/vscode-ext-python.png)
-
-2. After installation, the extension automatically detects all Python versions available on your system. You can see the currently selected interpreter in the **VS Code status bar** (bottom-right) whenever a `.py` file is open (for instance, `scripts/deploy.py`).
-
-    ![python-interpreter](resources/img/vscode-py-current-interpreter.png)
-
-3. Click the Python version in the status bar (or press `Ctrl+Shift+P` and type **Python: Select Interpreter**) to open the interpreter picker. Select **Python 3.12.x** from the list.
-
-    ![select-interpreter](resources/img/vscode-py-select-interpreter.png)
-
-> [!TIP]
-> If you have multiple Python versions installed (e.g., 3.10, 3.11, 3.12), the Python extension makes it easy to switch between them. The selected interpreter applies to the integrated terminal and any scripts you run from VS Code — no need to manage `PATH` or virtual environments manually.
-
 ### Prepare the AZURE_CREDENTIALS secret
 
 Automated deployments via GitHub Actions require a **service principal** — an identity in Microsoft Entra ID (formerly Azure AD) that represents an application rather than a human user. Your workshop environment should already have a service principal provisioned for you.
 
 > [!IMPORTANT]
-> If a service principal has **not** been set up yet, follow the step-by-step instructions in **Appendix A** at the end of this lab before continuing.
+> If a service principal has **not** been set up yet, follow the step-by-step instructions in **[Appendix A: Service Principal Setup](appendix-a-service-principal-setup.md)** before continuing.
 
-Using your service principal's details, prepare the following JSON — you will need it in Section 3 when configuring GitHub Actions:
+Using your service principal's details, prepare the following JSON — you will need it in Section 2 when configuring GitHub Actions:
 
 ```json
 {
@@ -88,14 +47,36 @@ Using your service principal's details, prepare the following JSON — you will 
 ```
 
 > [!TIP]
-> Keep this JSON in a temporary text file or clipboard manager — you will paste it into GitHub later.
+> Keep this JSON in a temporary text file or clipboard manager — you will paste it into GitHub shortly.
 
-### A note on PowerShell
+### Explore the repository structure
 
-The repository includes BPA (Best Practice Analyzer) scripts written in **PowerShell**. These run automatically in GitHub Actions, but if you want to run them locally you need PowerShell installed on your machine.
+Take a moment to browse the files in your newly created repository on GitHub. The template is organized like this:
 
-- **Windows**: PowerShell is built in — no action needed.
-- **macOS / Linux**: Install PowerShell by following the [official installation guide](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell).
+```text
+your-repo/
+├── src/                              ← Power BI project files (PBIP)
+│   ├── Sales.Report/
+│   ├── Sales.SemanticModel/
+│   ├── AnotherReport.Report/
+│   ├── Sales.pbip
+│   └── parameter.yml                 ← environment parameterization
+├── scripts/
+│   ├── deploy.py                     ← deployment script
+│   ├── deploy.config                 ← workspace name configuration (for CI/CD)
+│   └── bpa/                          ← BPA scripts and rule files
+│       ├── bpa.ps1
+│       ├── bpa-rules-semanticmodel.json
+│       └── bpa-rules-report.json
+├── .github/
+│   └── workflows/
+│       ├── deploy.yml                ← deployment workflow
+│       └── bpa.yml                   ← quality checks workflow
+├── requirements.txt                  ← Python dependencies
+└── .gitignore
+```
+
+All scripts and workflows are already in place — you will **not** need to create any of these files.
 
 ## 1. Introduction to fabric-cicd
 
@@ -130,198 +111,35 @@ PBIP Source Files (in your repo)
                └── fabric-cicd ──► Fabric Workspace
 ```
 
-In the following sections you will run a local deployment first, then see how GitHub Actions automates the process on every push.
+In the next section you will see how GitHub Actions automates the deployment process on every push.
 
 > [!NOTE]
 > This workshop uses a single target workspace per environment (DEV and PRD). In production scenarios, `fabric-cicd` supports advanced multi-environment parameterization via `parameter.yml`. See the [fabric-cicd documentation](https://microsoft.github.io/fabric-cicd/latest/) for details.
+>
+> If you want to try running deployments from your local machine, see **[Appendix: Local Deployment](appendix-local-deployment.md)**.
 
-## 2. Local deployment
+## 2. GitHub Actions
 
-**Goal**: Understand the deployment script, configure your target workspaces, and run your first deployment from your own machine.
-
-### Explore the repository structure
-
-The template repository is organized like this:
-
-```text
-your-repo/
-├── src/                              ← Power BI project files (PBIP)
-│   ├── Sales.Report/
-│   ├── Sales.SemanticModel/
-│   ├── AnotherReport.Report/
-│   ├── Sales.pbip
-│   └── parameter.yml                 ← environment parameterization
-├── scripts/
-│   ├── deploy.py                     ← deployment script
-│   ├── deploy.config                 ← workspace name configuration (for CI/CD)
-│   └── bpa/                          ← BPA scripts and rule files
-│       ├── bpa.ps1
-│       ├── bpa-rules-semanticmodel.json
-│       └── bpa-rules-report.json
-├── .github/
-│   └── workflows/
-│       ├── deploy.yml                ← deployment workflow
-│       └── bpa.yml                   ← quality checks workflow
-├── requirements.txt                  ← Python dependencies
-└── .gitignore
-```
-
-All scripts and workflows are already in place — you will **not** need to create any of these files.
-
-### Understanding `scripts/deploy.py`
-
-Open `scripts/deploy.py` in VS Code and take a moment to read through it. The script accepts three command-line arguments:
-
-| Argument | Purpose |
-| --- | --- |
-| `--workspace_name` | Target Fabric workspace name. If omitted, the script resolves it from configuration files (see below). |
-| `--environment` | An environment label (`DEV` or `PRD`). Used by `fabric-cicd` to apply the correct values from `parameter.yml`. Defaults to `DEV`. |
-| `--spn-auth` | When `True`, authenticates via the Azure CLI session (service principal — used in GitHub Actions). When `False` (default), opens a **browser window for interactive login** — this is what you use locally. |
-
-### Configuration files: `deploy.config` vs `.env`
-
-The script resolves the target workspace name in this order of priority:
-
-| Priority | Source | Committed to Git? | Purpose |
-| --- | --- | --- | --- |
-| 1 | `--workspace_name` CLI argument | n/a | Explicit override for one-off runs |
-| 2 | `.env` file in the repository root | **No** (listed in `.gitignore`) | Personal overrides for local development — optional |
-| 3 | `scripts/deploy.config` | **Yes** | Shared workspace configuration used by CI/CD and the team |
-
-In practice:
-
-- **`scripts/deploy.config`** is the main configuration file. It is committed to the repository and used by GitHub Actions. Edit this file to set the workspace names that the team and CI/CD pipeline should use.
-- **`.env`** (in the repository root) is an optional file for local overrides. It is listed in `.gitignore` and never pushed to GitHub. If you need to deploy to a personal workspace that differs from the team default, create a `.env` file rather than editing `deploy.config`.
-
-Both files use the same format — one variable per line:
-
-```ini
-PBI_WORKSPACE_PRD=Workshop - Lab 2
-PBI_WORKSPACE_DEV=Workshop - Lab 2 (DEV)
-```
-
-> [!IMPORTANT]
-> * The target workspaces **must already exist** in Microsoft Fabric before you can deploy to them. `fabric-cicd` does not create workspaces — it only publishes items to existing ones.
-> * For automated deployments (Section 3), the **service principal** must be added to each workspace with at least **Contributor** permissions. See **Appendix A** for details.
+**Goal**: Configure the workspace names, set up the deployment secret, understand the automated workflow, and trigger your first automated deployment.
 
 ### Configure your workspace names
 
-Open `scripts/deploy.config` in VS Code. Replace the default workspace names with your actual Fabric workspace names:
+Before the deployment workflow can run, you need to tell it which Fabric workspaces to deploy to.
 
-```ini
-PBI_WORKSPACE_PRD=<your production workspace name>
-PBI_WORKSPACE_DEV=<your development workspace name>
-```
+1. In your GitHub repository, navigate to the file `scripts/deploy.config` and click the **pencil icon** (✏️) to edit it directly on GitHub.
 
-> [!NOTE]
-> The workspace names you enter here will be persisted with your project in git and will be used by GitHub Actions for automated deployments. If you need to deploy to a different workspace locally, use the `.env` file for overrides or the `--workspace_name` CLI argument for one-off runs.
+2. Replace the default workspace names with your actual Fabric workspace names:
 
-### Install Python dependencies
+    ```ini
+    PBI_WORKSPACE_PRD=<your production workspace name>
+    PBI_WORKSPACE_DEV=<your development workspace name>
+    ```
 
-Open the integrated terminal in VS Code (`Ctrl + '`). Verify that the terminal is using **Python 3.12** — check the status bar at the bottom or run `python --version`.
-
-Then install the required packages:
-
-```bash
-pip install -r requirements.txt
-```
-
-This installs `fabric-cicd` and `python-dotenv` as well as any other transient dependencies into your active Python environment.
-
-> [!TIP]
-> If you have multiple Python versions installed and the `pip` command above installs packages into the wrong environment, use the following alternative to target a specific interpreter:
->
-> ```bash
-> python -m pip install -r requirements.txt
-> ```
->
-> Or, if you need to target Python 3.12 explicitly by its full path (common on Windows where both Python 3.11 and 3.12 are installed side-by-side), use:
->
-> ```bash
-> # Windows example
-> C:\Users\<YourUser>\AppData\Local\Programs\Python\Python312\python.exe -m pip install -r requirements.txt
->
-> # macOS / Linux example
-> /usr/local/bin/python3.12 -m pip install -r requirements.txt
-> ```
->
-> `fabric-cicd` requires **Python 3.12**, so make sure the interpreter you use is 3.12.
-
-> [!TIP]
-> If you have multiple Python versions installed and want to avoid confusion, consider using a virtual environment for this project. The Python extension in VS Code can automatically create and manage **virtual environments** for you. Learn more in the [VS Code Python documentation](https://code.visualstudio.com/docs/python/environments).
-
-### Run your first local deployment
-
-There are two ways to run the deployment script. The recommended approach for this workshop uses the VS Code Python Extension; the command-line alternative is listed at the end.
-
-#### Option A: Using the VS Code Extension
-
-1. Make sure **Python 3.12** is selected in the status bar (see above).
-
-2. Open the `deploy.py` script in VS Code.
-
-3. Select the **Run Python File** play button in the top-right corner of the editor:
-
-    ![run-py-file](resources/img/vscode-run-py-file.png)
-
-    The Python extension launches a new terminal and runs the script.
-    The script reads your workspace name from `deploy.config` (or `.env` if present) and starts the deployment.
-    Since you cannot specify any command-line arguments from the VS Code run button, it defaults to the `DEV` environment.
-
-4. A **browser window** will open asking you to sign in with your Microsoft account. This is the interactive authentication flow — it is only used for local runs, not in CI/CD.
-
-5. After sign-in, `fabric-cicd` publishes the items to your workspace. You should see output indicating each semantic model and report being deployed.
-
-    ![local deployment output](resources/img/local-tool-output.png)
-
-6. Once the script completes, open your **DEV** workspace in the Fabric portal and verify that the *Sales* semantic model and reports have appeared.
-
-#### Option B: Command line (advanced)
-
-If you prefer working directly on the command-line, open any terminal (for instance, the one included in VS Code), navigate to the repository root, and run:
-
-```bash
-python scripts/deploy.py --environment DEV
-```
-
-You can also override the workspace name directly:
-
-```bash
-python scripts/deploy.py --workspace_name "My Custom Workspace"
-```
-
-The advantage of this approach is that you can specify command-line arguments, but the VS Code method is more streamlined for local development and testing.
-
-> [!TIP]
-> Depending on your installation you might have to use `python3` instead of `python`. If the command points to a different version than 3.12, use the full path to your Python 3.12 installation or use the VS Code approach above, which makes switching interpreters straightforward.
-
-### Data refresh after first deployment
-
-After the **first** deployment to a workspace, the report visuals will not load because the semantic model has no data yet. `fabric-cicd` deploys only **definitions** (metadata), not data.
-
-To load data:
-
-1. In the Fabric portal, navigate to your deployed semantic model's **Settings** and take over ownership from the deployment principal.
-2. Under **Data Source Credentials**, configure the `Web` data source with **Anonymous** authentication.
-3. Trigger a **manual refresh**.
+3. Click **Commit changes**, add a commit message (e.g., "Configure workspace names for my environment"), and commit directly to `main`.
 
 > [!IMPORTANT]
-> This one-time setup is only needed after the **first** deployment to a workspace. Subsequent deployments will not require re-configuring credentials or triggering a manual refresh.
-
-### Commit your configuration changes
-
-Commit your `deploy.config` changes:
-
-```bash
-git add scripts/deploy.config
-git commit -m "Configure workspace names for my environment"
-```
-
-Do **not** push to GitHub yet — we will do that in the next section after setting up the GitHub Actions secret.
-
-## 3. GitHub Actions
-
-**Goal**: Configure the deployment secret, understand the automated workflow, and trigger your first automated deployment.
+> * The target workspaces **must already exist** in Microsoft Fabric before you can deploy to them. `fabric-cicd` does not create workspaces — it only publishes items to existing ones.
+> * The **service principal** must be added to each workspace with at least **Contributor** permissions. See **[Appendix A](appendix-a-service-principal-setup.md)** for details.
 
 ### Add the AZURE_CREDENTIALS secret
 
@@ -347,7 +165,7 @@ GitHub Actions needs a single secret to authenticate as the service principal. T
 
 ### Overview of the deployment workflow
 
-Open `.github/workflows/deploy.yml` in VS Code. This workflow automates the same `deploy.py` script you just ran locally. Here is when it runs:
+Open `.github/workflows/deploy.yml` in your repository on GitHub. This workflow automates the `deploy.py` script using the service principal for authentication. Here is when it runs:
 
 | Trigger | Environment | What happens |
 | --- | --- | --- |
@@ -372,20 +190,14 @@ Before GitHub Actions can deploy successfully, all of the following must be in p
 
 - [ ] **DEV and PRD Fabric workspaces** created with sufficient capacity (Premium or Fabric)
 - [ ] **Workspace names configured** in `scripts/deploy.config`
-- [ ] **Service principal** created in Entra ID with a client secret (see **Appendix A**)
+- [ ] **Service principal** created in Entra ID with a client secret (see **[Appendix A](appendix-a-service-principal-setup.md)**)
 - [ ] **Service principal authorized** to call Fabric APIs (Fabric Admin portal setting)
 - [ ] **Service principal added** to both workspaces with Contributor (or higher) permissions
 - [ ] **`AZURE_CREDENTIALS` secret** configured in the GitHub repository (above)
 
 ### Trigger your first automated deployment
 
-Push your local changes (the `deploy.config` edits from Section 2) to GitHub:
-
-```bash
-git push
-```
-
-Since this is a push to `main`, the deployment workflow will trigger automatically.
+Since you committed the `deploy.config` changes directly to `main`, the deployment workflow should already be running (or queued).
 
 1. Navigate to the **Actions** tab in your GitHub repository.
 
@@ -405,7 +217,7 @@ Open your **PRD** workspace in the Fabric portal. You should see the *Sales* rep
 
 ![Fabric workspace with deployed items](resources/img/fabric-sales.png)
 
-If this is the first deployment to the PRD workspace, you will need to configure data source credentials and trigger a manual refresh — the same steps described at the end of Section 2.
+If this is the first deployment to the PRD workspace, you will need to configure data source credentials and trigger a manual refresh.
 
 ![report with no data](resources/img/pbi-report-needs-refresh.png)
 
@@ -424,7 +236,7 @@ If this is the first deployment to the PRD workspace, you will need to configure
 > [!TIP]
 > To learn more about GitHub Actions, see the [GitHub Actions Quickstart](https://docs.github.com/en/actions/get-started/quickstart).
 
-## 4. Best Practice Analyzer (BPA)
+## 3. Best Practice Analyzer (BPA)
 
 **Goal**: Understand the automated quality checks that validate your Power BI project.
 
@@ -480,21 +292,10 @@ The tools themselves (Tabular Editor CLI and PBI Inspector CLI) are automaticall
 > [!TIP]
 > You can customize the BPA rules by editing the JSON rule files. For example, you might downgrade a rule from **Error** to **Warning** if it is too strict for your team, or add entirely new rules. See the [Tabular Editor BPA documentation](https://docs.tabulareditor.com/common/using-bpa.html) and the [PBI-InspectorV2 rules reference](https://github.com/NatVanG/PBI-InspectorV2) for details.
 
-### Running BPA locally (optional)
-
-If you have **PowerShell** installed (see Section 0), you can run BPA on your machine before pushing changes:
-
-```powershell
-.\scripts\bpa\bpa.ps1 -src @("./src/*.SemanticModel")
-.\scripts\bpa\bpa.ps1 -src @("./src/*.Report")
-```
-
-This is useful for catching issues early, before they reach a Pull Request.
-
-## 5. Branch protection setup
+## 4. Branch protection setup
 
 > [!NOTE]
-> **Advanced / Optional** — This is a one-time administrative setup step. If branch protection rules are already configured in your repository, skip ahead to [Section 6: Pull Request workflow](#6-pull-request-workflow).
+> **Advanced / Optional** — This is a one-time administrative setup step. If branch protection rules are already configured in your repository, skip ahead to [Section 5: Pull Request workflow](#5-pull-request-workflow).
 
 **Goal**: Protect the `main` branch so that changes can only land through a reviewed and quality-checked Pull Request.
 
@@ -521,7 +322,7 @@ Since any push to `main` triggers an automated deployment to production, it is c
 > [!TIP]
 > By requiring the **bpa** status check to pass, Pull Requests with BPA **Error**-level violations cannot be merged. This enforces quality standards automatically — no manual review needed to catch common issues.
 
-## 6. Pull Request workflow
+## 5. Pull Request workflow
 
 **Goal**: Experience the complete Pull Request workflow — from branching to merge — with BPA quality gates running automatically at every step.
 
@@ -529,7 +330,7 @@ This is the day-to-day development workflow when branch protection is active. Ev
 
 ### Start work in a new branch
 
-Create a new branch, make a minor change (for example, replace all occurrences of "MyCompany" in the report with your company name), commit the change, and push the new branch to GitHub.
+Create a new branch directly on GitHub or locally. Make a minor change (for example, replace all occurrences of "MyCompany" in the report with your company name), commit the change, and push the new branch to GitHub.
 
 ### Create a Pull Request
 
@@ -551,7 +352,7 @@ The BPA check is expected to **fail** at this point — one of the semantic mode
 
 ![PR blocked](resources/img/gh-pr-blocked.png)
 
-Navigate to the failed check run to see the details. Then fix the issue in VS Code, commit, and push to the same branch. The Pull Request will pick up the new commit and re-run the checks.
+Navigate to the failed check run to see the details. Then fix the issue (either on GitHub or in VS Code), commit, and push to the same branch. The Pull Request will pick up the new commit and re-run the checks.
 
 > [!TIP]
 > See the screenshot below for a hint of what needs fixing.
@@ -577,7 +378,6 @@ You've now:
 
 - Created a repository from a template with a complete CI/CD setup
 - Configured a service principal and GitHub secret for automated authentication
-- Deployed Power BI items locally using `fabric-cicd` and interactive browser login
 - Triggered automated deployments to production via GitHub Actions
 - Used BPA quality gates to catch issues before they reach production
 - Completed a full Pull Request workflow — from branch to merge — with automated quality gates enforced at every step
@@ -586,6 +386,7 @@ You've now:
 
 If you want to explore further after the workshop:
 
+- **Local deployment** — run `fabric-cicd` directly from your machine using interactive browser login. See **[Appendix: Local Deployment](appendix-local-deployment.md)** for step-by-step instructions.
 - **Multi-environment parameterization** — use `src/parameter.yml` to swap workspace IDs, connection strings, or report settings per environment. See the [fabric-cicd parameterization docs](https://microsoft.github.io/fabric-cicd/latest/how_to/parameterization/).
 - **Custom BPA rules** — tailor the rule files in `scripts/bpa/` to match your team's standards.
 - **GitHub Environments** — use [GitHub environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/managing-environments-for-deployment) for approval gates and environment-specific secrets.
@@ -604,6 +405,9 @@ If you want to explore further after the workshop:
 
 ---
 
-## Appendix A: Service Principal Setup
+## Appendices
 
-> Detailed step-by-step instructions for this one-time setup are in a separate document: **[appendix-a-service-principal-setup.md](appendix-a-service-principal-setup.md)**.
+| Document | Description |
+| --- | --- |
+| **[appendix-a-service-principal-setup.md](appendix-a-service-principal-setup.md)** | Step-by-step instructions for setting up a service principal in Microsoft Entra ID |
+| **[appendix-local-deployment.md](appendix-local-deployment.md)** | Running deployments from your local machine using interactive browser login |

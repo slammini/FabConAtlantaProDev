@@ -421,7 +421,7 @@ Tabular Model Definition Language (TMDL) is a human‑readable, code‑based lan
 
 
 
-4. Save your changes in **Power BI Desktop**, then close it.
+4. Save your changes in **Power BI Desktop**.
 
 5. Open **Visual Studio Code** and go to source control. Notice how the changes you made in Power BI Desktop are now reflected in the PBIP files. In green you can see the lines that were added. In red you can see the lines that were deleted:
 
@@ -429,12 +429,12 @@ Tabular Model Definition Language (TMDL) is a human‑readable, code‑based lan
 
 <img width="959" height="503" alt="calculated column changes" src="https://github.com/user-attachments/assets/62086739-74cf-428e-a11b-e73dd32646ad" />
 
+6. Add a name for the commit, and commit the changes.
+
 
 
 ### Edit semantic model using TMDL
 
-1. Close **Power BI Desktop** and Open **Visual Studio Code**
-1. Go to **File > Open Folder...** and open the PBIP folder.
 1. Open file `Sales.SemanticModel/definition/tables/Sales.tmdl`
 1. Notice the TMDL code readability features provided by [TMDL extension](https://marketplace.visualstudio.com/items?itemName=analysis-services.TMDL):
    * **Code highlighting** - Easily identify different elements of TMDL code: types, values, expressions

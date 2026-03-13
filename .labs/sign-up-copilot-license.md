@@ -60,4 +60,4 @@ After signing in, verify that GitHub Copilot is active:
 
 ## Next Steps
 
-Once your Copilot license is active and verified, proceed to **[Lab 1](.labs/lab1/lab.md)** to begin the workshop!
+Once your Copilot license is active and verified, proceed to **[Lab 3](.labs/lab3/lab.md)** to begin the workshop!

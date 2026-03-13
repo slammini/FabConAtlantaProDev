@@ -12,7 +12,7 @@ By the end of this workshop, you will:
 - Ensure you met all the [Requirements](#-requirements) before starting the labs.
 - Download this repository to your machine.
   
-  ![clone-repository](.labs/lab1/resources/img/clone-repository.png)
+  ![clone-repository](lab1/resources/img/clone-repository.png)
   
   Unzip the folder to a location of your choice. You will use the resource files in this folder throughout the labs.
 
@@ -20,15 +20,15 @@ By the end of this workshop, you will:
 
 ## 🧪 Labs
 
-### [Lab 1 — Power BI Project (PBIP) Fundamentals](.labs/lab1/lab.md)
+### [Lab 1 — Power BI Project (PBIP) Fundamentals](lab1/lab.md)
 
 Hands-on experience with the Power BI Project (PBIP) format. Covers how PBIP files are organized on disk, setting up Git source control, publishing to a Fabric workspace, and editing semantic models and reports directly as code using TMDL and PBIR.
 
-### [Lab 2 — Power BI & CI/CD](.labs/lab2/lab.md)
+### [Lab 2 — Power BI & CI/CD](lab2/lab.md)
 
 Build a production-grade CI/CD pipeline for a Power BI project on GitHub. Starting from a pre-configured repository template, you will configure automated deployments using GitHub Actions, enforce quality gates with the Best Practice Analyzer, and practice the Pull Request workflow.
 
-### [Lab 3 — Power BI Development with AI](.labs/lab3/lab.md)
+### [Lab 3 — Power BI Development with AI](lab3/lab.md)
 
 Learn how AI can supercharge your Power BI development - from batch-editing TMDL scripts with GitHub Copilot, to using AI agents to understand and update PBIR report files, to enforcing team best practices on a semantic model through an MCP server.
 

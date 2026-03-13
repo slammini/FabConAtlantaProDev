@@ -120,7 +120,7 @@ This lab shows how AI can supercharge your Power BI developments - from batch-ed
 
 ### Script all measures
 
-1. Open [.labs/lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.
+1. Open [lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.
 
 1. Open the **TMDL view** tab.
 
@@ -213,7 +213,7 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
 
 ### Prepare the report
 
-1. Open [.labs/lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.
+1. Open [lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.
 1. Go to **File > Save As**, navigate to the lab folder (e.g. `c:\temp\lab3\`) and select **Save as type**: `Power BI Project Files (*.pbip)`. Name it `Sales_Lab3_PBIR.pbip`.
    
     Your `lab3/` folder should look like this:
@@ -295,7 +295,7 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
     
 ### Connect to Power BI Desktop
 
-1. Open [.labs/lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.
+1. Open [lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.
 2. Open **Visual Studio Code** and start a **new Copilot chat session**.
 3. Arrange **VS Code** and **Power BI Desktop** side by side, and expand the chat window so you can observe the agent's actions.
 4. Type the following prompt and execute:
@@ -371,7 +371,7 @@ Without the `powerbi-tmdl` skill, the AI is likely to produce incorrect TMDL syn
 
 ### Review the model against team guidelines
 
-1. Open [.labs/lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.
+1. Open [lab1/resources/Sales.pbix](../lab1/resources/Sales.pbix) in **Power BI Desktop**.
 2. Copy the file [`resources/team-modeling-rules`](resources/team-modeling-rules) into your lab folder.
    
     Your `Lab3/` folder should look like this:

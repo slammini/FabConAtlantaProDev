@@ -589,7 +589,7 @@ TMDL View in Power BI Desktop allows you to view, edit, and apply changes to a s
 
    <img width="958" height="502" alt="Script TMDL View" src="https://github.com/user-attachments/assets/74259f7a-b98a-44f6-ae36-2529aa6b0c60" />
 
-   This generates a TMDL Script for the selected object. A TMDL Script includes a statement and the corresponding TMDL object definition that describes the desired state of the model object.
+   This generates a TMDL Script for the selected object.
 
    Alternatively, you can right-click an object in the Data view and select **Script TMDL to new tab** or **to the clipboard**:
 
@@ -598,16 +598,26 @@ TMDL View in Power BI Desktop allows you to view, edit, and apply changes to a s
 3. Select a different semantic object (a table, measure, or column) and drag it into the editor. A new tab will be created with the TMDL Script for that object. If you save your changes in Power BI Desktop, your scripts will be saved as part of your PBIP under the **TMDLScripts** folder.
 
 4. Now we'll create a new role using TMDL. Script your Roles by dragging **Roles** from the Data pane to your editor. Add a new role for **Australia** and click **Preview** to preview the changes to the semantic model as a TMDL code diff.
+   ```TMDL
+    role 'Store - Australia'
+		    modelPermission: read
+      tablePermission Store = [Country] == "Australia"
+     ```
 
    <img width="959" height="503" alt="Role Australia Preview" src="https://github.com/user-attachments/assets/9372f187-b15c-4e88-b281-0b584aded482" />
 
    Without closing the preview, add a new role for **United Kingdom**. Select **Update preview** to refresh the preview after changes.
+    ```TMDL
+    role 'Store - United Kingdom'
+		    modelPermission: read
+      tablePermission Store = [Country] == "United Kingdom"
+     ```
 
    <img width="958" height="502" alt="Preview Out Of Date" src="https://github.com/user-attachments/assets/b79ce403-b838-418b-b070-aba93e3be538" />
 
-5. Click **Apply** to apply changes to your model.
+6. Click **Apply** to apply changes to your model.
 
-6. Script all your measures by dragging **Measures** from the Data pane to the editor. Some measures use euros while others use dollars. We'll now standardize the currency format so all measures use the dollar format. Click the **Replace** option (`Ctrl+F`) from the ribbon to replace `€` with `$`. Preview your changes and apply them to the model.
+7. Script all your measures by dragging **Measures** from the Data pane to the editor. Some measures use euros while others use dollars. We'll now standardize the currency format so all measures use the dollar format. Click the **Replace** option (`Ctrl+F`) from the ribbon to replace `€` with `$`. Preview your changes and apply them to the model.
 
    <img width="959" height="502" alt="Standardize currency" src="https://github.com/user-attachments/assets/f2e49027-572a-4506-a972-56ffdf6d2e40" />
 
@@ -632,7 +642,7 @@ TMDL View in Power BI Desktop allows you to view, edit, and apply changes to a s
 
 ✅ **Goal**: Map a report object to a PBIR file, identify changes, batch apply changes using a script, and edit PBIR directly on a workspace using the [Fabric extension](https://marketplace.visualstudio.com/items?itemName=fabric.vscode-fabric).
 
-In this section, we'll focus on report as code with PBIR. We'll do a deep dive into the folders and subfolders that represent the Power BI report — specifically, the <project name>.Report folder within our PBIP project.
+In this section, we'll focus on report as code with PBIR. We'll do a deep dive into the folders and subfolders that represent the Power BI report — specifically, the Sales.Report folder within our PBIP project.
 
 To learn more: [Power BI Desktop project report folder](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report?tabs=v2%2Cdesktop)
 
@@ -670,7 +680,7 @@ To learn more: [Power BI Desktop project report folder](https://learn.microsoft.
 
    ![New page with visual in Power BI Desktop](resources/img/new-page-visual-pbi-desktop.png)
 
-4. Save your changes and return to VS Code to explore the modified files. Inspect the added and modified files.
+4. Save your changes and return to VS Code to explore the modified files. Inspect the added and changed files.
 
    ![VS Code Source Control showing new and modified PBIR files](resources/img/vscode-source-control-modified-pbir.png)
 

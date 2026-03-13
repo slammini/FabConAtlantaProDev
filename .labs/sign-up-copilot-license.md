@@ -35,7 +35,7 @@ This guide walks you through the process of signing up for a GitHub Copilot lice
 2. Log in with the GitHub username that you used in the sign-up form.
 3. If you are already signed in, you may need to sign out and sign back in for the new Copilot license to take effect:
    - Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
-   - Type **"GitHub Copilot: Sign Out"** and select it
+   - Type GitHub Copilot: Sign Out and select it
    - Then sign back in with your GitHub account
 
 
@@ -44,7 +44,7 @@ This guide walks you through the process of signing up for a GitHub Copilot lice
 After signing in, verify that GitHub Copilot is active:
 
 1. You should see the Copilot icon in the VS Code status bar (bottom of the window).
-2. Open the Copilot Chat panel — you should see available the follwoing models
+2. Open the Copilot Chat panel — you should see available the follwoing models and premium
 
 
 ## Troubleshooting

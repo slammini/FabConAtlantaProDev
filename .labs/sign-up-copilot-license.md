@@ -44,6 +44,8 @@ After signing in, verify that GitHub Copilot is active:
 
 1. You should see the Copilot icon in the VS Code status bar (bottom of the window).
 2. Open the Copilot Chat panel — you should see available the follwoing models and premium
+   ![models](lab3/resources/img/models.png)
+   ![premium](lab3/resources/img/premium.png)
 
 
 ## Troubleshooting

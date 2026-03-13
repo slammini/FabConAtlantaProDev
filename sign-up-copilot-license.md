@@ -2,7 +2,6 @@
 
 This guide walks you through the process of signing up for a GitHub Copilot license for this workshop. Follow each step carefully to ensure you have full access to GitHub Copilot in VS Code.
 
-
 ## Prerequisites
 
 - A GitHub account
@@ -24,7 +23,7 @@ This guide walks you through the process of signing up for a GitHub Copilot lice
 
 1. Check the **email associated with your GitHub account** for an invitation to join the workshop organization.
 2. Check the box **Ask for a Copilot seat**  
-   ![join organization](lab3/resources/img/join-organization.png)
+   ![join organization](.labs/lab3/resources/img/join-organization.png)
 4. Wait for the seat to be provisioned — this may take a few moments.
 
 
@@ -57,7 +56,3 @@ After signing in, verify that GitHub Copilot is active:
 | Copilot not showing in VS Code | Restart VS Code completely. Make sure the GitHub Copilot extension is installed. |
 | Signed in but no models/premium | Sign out and sign back in. Ensure your Copilot seat has been provisioned. |
 
-
-## Next Steps
-
-Once your Copilot license is active and verified, proceed to **[Lab 3](.labs/lab3/lab.md)** to begin the workshop!

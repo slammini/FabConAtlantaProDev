@@ -1,13 +1,2 @@
-*.log
-_tools/
-
-
-**/lab3/**/*.pbix
-
-.labs/lab3/lab-old.md
-
-.labs/lab3/refactor-lab3.md
-
-Labs-Refactorings.md
-
-Improvements.md
+**/.pbi/localSettings.json
+**/.pbi/cache.abf

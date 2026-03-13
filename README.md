@@ -41,6 +41,8 @@ Learn how AI can supercharge your Power BI development - from batch-editing TMDL
     - Power BI Pro license    
   - [GitHub account](https://github.com/signup)
   - [GitHub Copilot Free, Pro or Business](https://github.com/github-copilot/pro)
+    - **A Copilot license can be provided for use during the workshop.** See [sign-up-copilot-license](sign-up-copilot-license.md) for instructions.
+
 - Software
   - [Power BI Desktop - latest release](https://pbi.onl/download)
   - [Visual Studio Code - latest release](https://code.visualstudio.com/download)

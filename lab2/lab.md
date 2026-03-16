@@ -369,14 +369,26 @@ The previous change introduced a violation of the modeling rule `PROVIDE_FORMAT_
    This merges your changes into `main` and **automatically triggers the deployment workflow** to **PRD**.
 
 2. A merge into the `main` branch triggers the `deploy` workflow because it is configured to run on pushes to the `main` branch.
-3. Navigate to the **Actions** tab in your GitHub repository and note that the `deploy` workflow should be running.
+
+### Confirm deploy to PRD
+
+1. Navigate to the **Actions** tab in your GitHub repository and note that the `deploy` workflow should be running.
 
     ![gh-pr-deploy-prd-running](resources/img/gh-pr-deploy-prd-running.png)
-4. The deployment should be successful. Select the **deploy** job and confirm that it was deployed to the **PRD** environment.
+
+1. The deployment should be successful. Select the **deploy** job and confirm that it was deployed to the **PRD** environment.
 
     ![gh-pr-prd-success-details](resources/img/gh-pr-prd-success-details.png)
 
-5. Confirm the measure created in the development branch is now available in the **PRD** semantic model.
+2. Confirm that the `fabric_cicd` **PRD** parameterization was applied.
+
+    Open the semantic model settings page and verify that the `Environment` parameter has the value **"PRD"**.
+
+    ![gh-pr-semantic-model-parameter](resources/img/gh-pr-semantic-model-parameter.png)
+
+    This parameterization is defined in `src/parameter.yml`. See the fabric-cicd parameterization documentation for additional details on the types of parameterizations that are supported: [fabric_cicd parameterization](https://microsoft.github.io/fabric-cicd/latest/how_to/parameterization/).
+
+3. Confirm the measure created in the development branch is now available in the **PRD** semantic model.
    
 
 ## ✅ Wrap-up

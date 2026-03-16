@@ -84,9 +84,9 @@ your-repo/
 │   ├── Sales.SemanticModel/
 │   ├── AnotherReport.Report/
 │   ├── Sales.pbip
-│   └── parameter.yml                 ← environment parameterization
+│   └── parameter.yml                 ← fabric_cicd parameterization file
 ├── scripts/
-│   ├── deploy.py                     ← deployment script
+│   ├── deploy.py                     ← deployment script using fabric_cicd
 │   ├── deploy.config                 ← workspace name configuration (for CI/CD)
 │   └── bpa/                          ← BPA scripts and rule files
 │       ├── bpa.ps1
@@ -94,8 +94,8 @@ your-repo/
 │       └── bpa-rules-report.json
 ├── .github/
 │   └── workflows/
-│       ├── deploy.yml                ← deployment workflow
-│       └── bpa.yml                   ← quality checks workflow
+│       ├── deploy.yml                ← GitHub Action deployment workflow
+│       └── bpa.yml                   ← GitHub Action quality checks workflow
 ├── requirements.txt                  ← Python dependencies
 └── .gitignore
 ```

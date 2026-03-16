@@ -199,9 +199,9 @@ Take some time to review the YAML code of both workflows. To learn more about Gi
 
     In case of errors, confirm the following:
 
+   - [ ] **`AZURE_CREDENTIALS` secret** configured in your GitHub repository
    - [ ] **Workspace configured in Run Workflow** exists in your Fabric tenant   
-   - [ ] **Service Principal** have at least **Contributor** permissions to the workspace     
-   - [ ] **`AZURE_CREDENTIALS` secret** configured in the GitHub repository
+   - [ ] **Service Principal** have at least **Contributor** permissions to the workspace        
    
 6. Open your **DEV** workspace in the Fabric portal. You should see the reports and semantic model deployed.
 
@@ -250,6 +250,13 @@ Take some time to review the YAML code of both workflows. To learn more about Gi
     | **Error**   | Pipeline **fails** — the check is blocked until the issue is fixed | Critical issues that must be resolved (e.g., missing descriptions on visible columns) |
     | **Warning** | Pipeline **passes** but the issue is flagged in the log            | Best-practice recommendations worth reviewing (e.g., redundant DAX expressions)       |
     | **Info**    | Logged for informational purposes only, no impact                  | Suggestions and style notes                                                           |
+
+    The rules that are executed can be customized in the repository:
+
+    * **Semantic Model Rules:** `scripts/bpa/bpa-rules-semanticmodel.json`
+      * See the Tabular Editor BPA documentation for more details on how to customize them: [https://docs.tabulareditor.com/common/using-bpa.html](https://docs.tabulareditor.com/common/using-bpa.html)
+    * **Report Rules:** `scripts/bpa/bpa-rules-report.json`
+      * See the PBI-InspectorV2 rules reference for more details on how to customize them: [https://github.com/NatVanG/PBI-InspectorV2](https://github.com/NatVanG/PBI-InspectorV2)
 
 
 ## 3. Pull Request workflow
@@ -326,9 +333,6 @@ It's expected the deployment to **DEV** to be successfull and the BPA check to *
 
 The previous change introduced a violation of the modeling rule `PROVIDE_FORMAT_STRING_FOR_MEASURES`, defined in the semantic model BPA rules file `scripts\bpa\bpa-rules-semanticmodel.json`.
 
-> [!IMPORTANT]
-> Even when BPA checks fail, it is still possible to merge changes into the `main` branch. To prevent this, configure [GitHub rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets) to block merges to `main` when required checks fail. See [appendix-branch-protection](appendix-branch-protection.md) for guidance, for private repositories a GitHub Pro, GitHub Team, and GitHub Enterprise Cloud is required.
-
 1. Navigate to the failed check run to see the details. 
    
    ![gh-pr-dev-open-bpa](resources/img/gh-pr-dev-open-bpa.png)   
@@ -353,6 +357,9 @@ The previous change introduced a violation of the modeling rule `PROVIDE_FORMAT_
 
     ![gh-pr-checks-passed](resources/img/gh-pr-checks-passed.png)
    
+> [!IMPORTANT]
+> Even when BPA checks fail, it is still possible to merge changes into the `main` branch. To prevent this, configure [GitHub rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets) to block merges to `main` when required checks fail. See [appendix-branch-protection](appendix-branch-protection.md) for guidance, for private repositories a GitHub Pro, GitHub Team, and GitHub Enterprise Cloud is required.
+
 ### Merge the Pull Request
 
 1. Click the green **Merge pull request** button. 

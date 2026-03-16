@@ -389,8 +389,11 @@ The previous change introduced a violation of the modeling rule `PROVIDE_FORMAT_
     This parameterization is defined in `src/parameter.yml`. See the fabric-cicd parameterization documentation for additional details on the types of parameterizations that are supported: [fabric_cicd parameterization](https://microsoft.github.io/fabric-cicd/latest/how_to/parameterization/).
 
 3. Confirm the measure created in the development branch is now available in the **PRD** semantic model.
-   
 
+In case of errors, confirm the following:
+
+- [ ] **Service Principal** have at least **Contributor** permissions to the **PRD** workspace configured in `scripts/deploy.py`
+   
 ## ✅ Wrap-up
 
 You've now:

@@ -2,10 +2,7 @@
 
 ⏱️ Duration: 90 minutes
 
-## Why this lab matters
 In this lab, you will learn how to build Power BI solutions in a more reliable, scalable, and team‑friendly way by using CI/CD (Continuous Integration and Continuous Deployment). Instead of manually updating reports and models, you’ll see how changes can be automatically tested and deployed using standard development practices. This approach helps reduce mistakes, makes collaboration easier, and ensures that what you build in development is safely promoted to test and production environments. This is especially useful for teams working on complex Power BI projects or managing enterprise‑scale solutions.
-
-You will work with Power BI Project files (PBIP) to treat reports and semantic models as code, GitHub to store and track changes, and GitHub Actions to automate the deployment process. GitHub Actions runs a set of steps for you whenever changes are made, such as deploying your Power BI content to Fabric without manual intervention. You will also use a service principal to enable secure, automated publishing. Together, these components show how Power BI fits into modern DevOps workflows and how you can apply the same practices used in application development to analytics projects.
 
 This lab guides you through building a production-grade CI/CD pipeline for a Power BI project on GitHub. Starting from a pre-configured repository template, you will configure automated deployments using GitHub Actions, enforce quality gates with the Best Practice Analyzer, and practice the Pull Request workflow that ties it all together.
 
@@ -31,6 +28,7 @@ No local setup is required for this lab - all you need is a GitHub account and t
 ## 🛠️ Prerequisites
 
 - [GitHub account](https://github.com/signup)
+- Service principal
 
 ## Introduction to fabric-cicd
 

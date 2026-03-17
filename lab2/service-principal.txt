@@ -1,0 +1,11 @@
+## Service Principal Name
+
+FabConAtlanta26_PBIMastery
+
+## AZURE_CREDENTIALS.json
+
+{
+  "clientId": "0b3874b0-6ca1-47d1-98cd-7426420128e8",
+  "clientSecret": "ib48Q~oVQEMhdCZqIG1ZtU.xZVl7nTzxkUiuWcz2",
+  "tenantId": "f527843b-95a5-498e-b6d4-e8895b9816c6"
+}
